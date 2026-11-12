@@ -1,0 +1,116 @@
+{
+  "floor_plate": {
+    "source": "ambientCG MetalPlates008",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness"
+    ],
+    "tileSizeMeters": 2.0,
+    "notes": "Light grey panel mosaic with seams; multiply colour down / tint blue-teal"
+  },
+  "floor_tread": {
+    "source": "ambientCG DiamondPlate008C",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness",
+      "ao"
+    ],
+    "tileSizeMeters": 1.0,
+    "notes": "Blue-grey diamond tread plate"
+  },
+  "floor_grate": {
+    "source": "ambientCG MetalWalkway013",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness",
+      "opacity"
+    ],
+    "tileSizeMeters": 1.5,
+    "notes": "Dark perforated walkway; use opacity as alphaMap/alphaTest"
+  },
+  "floor_concrete": {
+    "source": "ambientCG Concrete031",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "ao"
+    ],
+    "tileSizeMeters": 3.0,
+    "notes": "Dark stained concrete"
+  },
+  "wall_metal": {
+    "source": "ambientCG MetalPlates013",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness",
+      "ao"
+    ],
+    "tileSizeMeters": 2.0,
+    "notes": "Rust-streaked weathered steel plates"
+  },
+  "wall_concrete": {
+    "source": "ambientCG Concrete044D",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness",
+      "ao"
+    ],
+    "tileSizeMeters": 3.0,
+    "notes": "Rough dark concrete"
+  },
+  "metal_rust": {
+    "source": "ambientCG Rust007",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "ao"
+    ],
+    "tileSizeMeters": 1.5,
+    "notes": "Heavy orange rust; desaturate/darken for cold look"
+  },
+  "metal_dark": {
+    "source": "ambientCG Metal038",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness"
+    ],
+    "tileSizeMeters": 1.5,
+    "notes": "Dark grey scratched steel, low contrast"
+  },
+  "metal_painted": {
+    "source": "ambientCG PaintedMetal013",
+    "maps": [
+      "color",
+      "normal",
+      "roughness",
+      "metalness",
+      "ao"
+    ],
+    "tileSizeMeters": 1.5,
+    "notes": "White chipped paint over rust/bare metal; tint it"
+  },
+  "rubber": {
+    "source": "ambientCG Rubber001",
+    "maps": [
+      "color",
+      "normal",
+      "roughness"
+    ],
+    "tileSizeMeters": 1.0,
+    "notes": "Black rubber, fine grain"
+  }
+}

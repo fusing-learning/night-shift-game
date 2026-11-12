@@ -1,0 +1,528 @@
+{
+  "sounds": {
+    "amb_factory": {
+      "files": [
+        "music/amb_factory.flac"
+      ],
+      "gain": 0.45,
+      "loop": true
+    },
+    "mus_drone": {
+      "files": [
+        "music/mus_drone.flac"
+      ],
+      "gain": 0.4,
+      "loop": true
+    },
+    "mus_tension": {
+      "files": [
+        "music/mus_tension.flac"
+      ],
+      "gain": 0.5,
+      "loop": true
+    },
+    "mus_combat": {
+      "files": [
+        "music/mus_combat.flac"
+      ],
+      "gain": 0.55,
+      "loop": true
+    },
+    "mus_boss": {
+      "files": [
+        "music/mus_boss.flac"
+      ],
+      "gain": 0.6,
+      "loop": true
+    },
+    "mus_title": {
+      "files": [
+        "music/mus_title.flac"
+      ],
+      "gain": 0.55,
+      "loop": true
+    },
+    "mus_ending": {
+      "files": [
+        "music/mus_ending.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "mus_death": {
+      "files": [
+        "music/mus_death.flac"
+      ],
+      "gain": 0.75,
+      "loop": false
+    },
+    "amb_furnace": {
+      "files": [
+        "music/amb_furnace.flac"
+      ],
+      "gain": 0.4,
+      "loop": true
+    },
+    "amb_alarm": {
+      "files": [
+        "music/amb_alarm.flac"
+      ],
+      "gain": 0.35,
+      "loop": true
+    },
+    "amb_boss_breath": {
+      "files": [
+        "music/amb_boss_breath.flac"
+      ],
+      "gain": 0.55,
+      "loop": true
+    },
+    "heartbeat": {
+      "files": [
+        "sfx/heartbeat.flac"
+      ],
+      "gain": 0.6,
+      "loop": true
+    },
+    "blade_hum": {
+      "files": [
+        "sfx/blade_hum.flac"
+      ],
+      "gain": 0.3,
+      "loop": true
+    },
+    "laser_shot": {
+      "files": [
+        "sfx/laser_shot_1.flac",
+        "sfx/laser_shot_2.flac",
+        "sfx/laser_shot_3.flac",
+        "sfx/laser_shot_4.flac"
+      ],
+      "gain": 0.75,
+      "loop": false
+    },
+    "laser_hit_flesh": {
+      "files": [
+        "sfx/laser_hit_flesh_1.flac",
+        "sfx/laser_hit_flesh_2.flac",
+        "sfx/laser_hit_flesh_3.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "laser_hit_metal": {
+      "files": [
+        "sfx/laser_hit_metal_1.flac",
+        "sfx/laser_hit_metal_2.flac",
+        "sfx/laser_hit_metal_3.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "laser_overheat": {
+      "files": [
+        "sfx/laser_overheat.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "laser_empty": {
+      "files": [
+        "sfx/laser_empty.flac"
+      ],
+      "gain": 0.5,
+      "loop": false
+    },
+    "laser_ready": {
+      "files": [
+        "sfx/laser_ready.flac"
+      ],
+      "gain": 0.45,
+      "loop": false
+    },
+    "blade_ignite": {
+      "files": [
+        "sfx/blade_ignite.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "blade_swing": {
+      "files": [
+        "sfx/blade_swing_1.flac",
+        "sfx/blade_swing_2.flac",
+        "sfx/blade_swing_3.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "blade_hit": {
+      "files": [
+        "sfx/blade_hit_1.flac",
+        "sfx/blade_hit_2.flac",
+        "sfx/blade_hit_3.flac"
+      ],
+      "gain": 0.7,
+      "loop": false
+    },
+    "footstep_metal": {
+      "files": [
+        "sfx/footstep_metal_1.flac",
+        "sfx/footstep_metal_2.flac",
+        "sfx/footstep_metal_3.flac",
+        "sfx/footstep_metal_4.flac",
+        "sfx/footstep_metal_5.flac",
+        "sfx/footstep_metal_6.flac"
+      ],
+      "gain": 0.3,
+      "loop": false
+    },
+    "footstep_grate": {
+      "files": [
+        "sfx/footstep_grate_1.flac",
+        "sfx/footstep_grate_2.flac",
+        "sfx/footstep_grate_3.flac",
+        "sfx/footstep_grate_4.flac"
+      ],
+      "gain": 0.32,
+      "loop": false
+    },
+    "dodge": {
+      "files": [
+        "sfx/dodge.flac"
+      ],
+      "gain": 0.45,
+      "loop": false
+    },
+    "player_hurt": {
+      "files": [
+        "sfx/player_hurt_1.flac",
+        "sfx/player_hurt_2.flac",
+        "sfx/player_hurt_3.flac"
+      ],
+      "gain": 0.65,
+      "loop": false
+    },
+    "player_death": {
+      "files": [
+        "sfx/player_death.flac"
+      ],
+      "gain": 0.8,
+      "loop": false
+    },
+    "flashlight_click": {
+      "files": [
+        "sfx/flashlight_click.flac"
+      ],
+      "gain": 0.35,
+      "loop": false
+    },
+    "pickup_energy": {
+      "files": [
+        "sfx/pickup_energy.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "pickup_health": {
+      "files": [
+        "sfx/pickup_health.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "pickup_key": {
+      "files": [
+        "sfx/pickup_key.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "checkpoint": {
+      "files": [
+        "sfx/checkpoint.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "ui_start": {
+      "files": [
+        "sfx/ui_start.flac"
+      ],
+      "gain": 0.8,
+      "loop": false
+    },
+    "door_open": {
+      "files": [
+        "sfx/door_open.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "door_locked": {
+      "files": [
+        "sfx/door_locked.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "switch_lever": {
+      "files": [
+        "sfx/switch_lever.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "power_up": {
+      "files": [
+        "sfx/power_up.flac"
+      ],
+      "gain": 0.65,
+      "loop": false
+    },
+    "steam_burst": {
+      "files": [
+        "sfx/steam_burst_1.flac",
+        "sfx/steam_burst_2.flac"
+      ],
+      "gain": 0.5,
+      "loop": false
+    },
+    "spark_zap": {
+      "files": [
+        "sfx/spark_zap_1.flac",
+        "sfx/spark_zap_2.flac",
+        "sfx/spark_zap_3.flac"
+      ],
+      "gain": 0.45,
+      "loop": false
+    },
+    "metal_clank": {
+      "files": [
+        "sfx/metal_clank_1.flac",
+        "sfx/metal_clank_2.flac",
+        "sfx/metal_clank_3.flac",
+        "sfx/metal_clank_4.flac"
+      ],
+      "gain": 0.5,
+      "loop": false
+    },
+    "drip": {
+      "files": [
+        "sfx/drip_1.flac",
+        "sfx/drip_2.flac",
+        "sfx/drip_3.flac"
+      ],
+      "gain": 0.35,
+      "loop": false
+    },
+    "stinger_scare": {
+      "files": [
+        "sfx/stinger_scare_1.flac",
+        "sfx/stinger_scare_2.flac"
+      ],
+      "gain": 0.95,
+      "loop": false
+    },
+    "stinger_discover": {
+      "files": [
+        "sfx/stinger_discover.flac"
+      ],
+      "gain": 0.85,
+      "loop": false
+    },
+    "gore_splat": {
+      "files": [
+        "sfx/gore_splat_1.flac",
+        "sfx/gore_splat_2.flac",
+        "sfx/gore_splat_3.flac",
+        "sfx/gore_splat_4.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "crawler_chitter": {
+      "files": [
+        "sfx/crawler_chitter_1.flac",
+        "sfx/crawler_chitter_2.flac",
+        "sfx/crawler_chitter_3.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "crawler_attack": {
+      "files": [
+        "sfx/crawler_attack_1.flac",
+        "sfx/crawler_attack_2.flac"
+      ],
+      "gain": 0.7,
+      "loop": false
+    },
+    "crawler_death": {
+      "files": [
+        "sfx/crawler_death_1.flac",
+        "sfx/crawler_death_2.flac"
+      ],
+      "gain": 0.65,
+      "loop": false
+    },
+    "crawler_skitter": {
+      "files": [
+        "sfx/crawler_skitter_1.flac",
+        "sfx/crawler_skitter_2.flac",
+        "sfx/crawler_skitter_3.flac"
+      ],
+      "gain": 0.4,
+      "loop": false
+    },
+    "brute_growl": {
+      "files": [
+        "sfx/brute_growl_1.flac",
+        "sfx/brute_growl_2.flac"
+      ],
+      "gain": 0.8,
+      "loop": false
+    },
+    "brute_step": {
+      "files": [
+        "sfx/brute_step_1.flac",
+        "sfx/brute_step_2.flac"
+      ],
+      "gain": 0.7,
+      "loop": false
+    },
+    "brute_charge": {
+      "files": [
+        "sfx/brute_charge.flac"
+      ],
+      "gain": 0.85,
+      "loop": false
+    },
+    "brute_slam": {
+      "files": [
+        "sfx/brute_slam.flac"
+      ],
+      "gain": 0.9,
+      "loop": false
+    },
+    "brute_death": {
+      "files": [
+        "sfx/brute_death.flac"
+      ],
+      "gain": 0.85,
+      "loop": false
+    },
+    "spitter_gurgle": {
+      "files": [
+        "sfx/spitter_gurgle_1.flac",
+        "sfx/spitter_gurgle_2.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "spitter_spit": {
+      "files": [
+        "sfx/spitter_spit.flac"
+      ],
+      "gain": 0.65,
+      "loop": false
+    },
+    "bile_splat": {
+      "files": [
+        "sfx/bile_splat_1.flac",
+        "sfx/bile_splat_2.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "spitter_death": {
+      "files": [
+        "sfx/spitter_death.flac"
+      ],
+      "gain": 0.7,
+      "loop": false
+    },
+    "stalker_whisper": {
+      "files": [
+        "sfx/stalker_whisper_1.flac",
+        "sfx/stalker_whisper_2.flac",
+        "sfx/stalker_whisper_3.flac"
+      ],
+      "gain": 0.55,
+      "loop": false
+    },
+    "stalker_creak": {
+      "files": [
+        "sfx/stalker_creak_1.flac",
+        "sfx/stalker_creak_2.flac"
+      ],
+      "gain": 0.6,
+      "loop": false
+    },
+    "stalker_shriek": {
+      "files": [
+        "sfx/stalker_shriek.flac"
+      ],
+      "gain": 0.9,
+      "loop": false
+    },
+    "stalker_death": {
+      "files": [
+        "sfx/stalker_death.flac"
+      ],
+      "gain": 0.75,
+      "loop": false
+    },
+    "boss_roar": {
+      "files": [
+        "sfx/boss_roar_1.flac",
+        "sfx/boss_roar_2.flac"
+      ],
+      "gain": 1.0,
+      "loop": false
+    },
+    "boss_slam": {
+      "files": [
+        "sfx/boss_slam.flac"
+      ],
+      "gain": 0.95,
+      "loop": false
+    },
+    "boss_spit": {
+      "files": [
+        "sfx/boss_spit.flac"
+      ],
+      "gain": 0.8,
+      "loop": false
+    },
+    "boss_spawn": {
+      "files": [
+        "sfx/boss_spawn.flac"
+      ],
+      "gain": 0.75,
+      "loop": false
+    },
+    "boss_hurt": {
+      "files": [
+        "sfx/boss_hurt_1.flac",
+        "sfx/boss_hurt_2.flac"
+      ],
+      "gain": 0.85,
+      "loop": false
+    },
+    "boss_phase": {
+      "files": [
+        "sfx/boss_phase.flac"
+      ],
+      "gain": 0.95,
+      "loop": false
+    },
+    "boss_death": {
+      "files": [
+        "sfx/boss_death.flac"
+      ],
+      "gain": 1.0,
+      "loop": false
+    }
+  }
+}

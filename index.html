@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HOLLOW SHIFT</title>
+  <link rel="stylesheet" href="/src/ui/style.css" />
+</head>
+<body>
+  <canvas id="game"></canvas>
+  <div id="cursor"><i></i></div>
+
+  <div id="hud" class="hidden">
+    <div id="objective"></div>
+    <div id="toast"></div>
+    <div id="boss"><div id="bossName"></div><div class="bar"><div id="bossFill"></div><div id="bossLag"></div></div></div>
+    <div id="vitals">
+      <div class="row"><span class="lbl">VITALS</span><div class="bar hp"><div id="hpLag"></div><div id="hpFill"></div></div></div>
+      <div class="row"><span class="lbl">CELL</span><div class="bar en"><div id="enFill"></div></div></div>
+      <div class="row"><span class="lbl">HEAT</span><div class="bar heat"><div id="heatFill"></div></div></div>
+    </div>
+    <div id="prompt"></div>
+    <div id="hint"></div>
+  </div>
+
+  <div id="title" class="screen">
+    <div class="titleWrap">
+      <div class="kicker">SECTOR 9 · NIGHT ROTATION</div>
+      <h1>HOLLOW&nbsp;SHIFT</h1>
+      <div id="loading"><div id="loadBar"><div id="loadFill"></div></div><div id="loadText">LOADING</div></div>
+      <div id="start" class="hidden">CLICK TO BEGIN</div>
+      <div class="controls">
+        <span><b>WASD</b> move</span><span><b>MOUSE</b> aim</span><span><b>LMB</b> laser</span><span><b>RMB / SPACE</b> blade</span>
+        <span><b>SHIFT</b> dodge</span><span><b>F</b> torch</span><span><b>E</b> use</span><span><b>ESC</b> pause</span><span><b>M</b> mute</span>
+      </div>
+      <div class="note">Headphones recommended.</div>
+    </div>
+  </div>
+
+  <div id="death" class="screen hidden"><div class="deathWrap"><h2>THE SHIFT CONTINUES</h2><p>press any key</p></div></div>
+  <div id="pause" class="screen hidden"><div class="deathWrap"><h2>PAUSED</h2><p>ESC to resume</p></div></div>
+  <div id="end" class="screen hidden">
+    <div class="endWrap"><div class="kicker">YOU CLOCKED OUT</div><h1>HOLLOW&nbsp;SHIFT</h1>
+      <div id="stats"></div><div id="again">CLICK TO PLAY AGAIN</div></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

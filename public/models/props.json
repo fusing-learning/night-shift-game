@@ -1,0 +1,1632 @@
+{
+ "units": "metres",
+ "axes": "glTF: +Y up, prop front faces +Z (-Y in Blender); wall props have back on z=0 plane and protrude toward +Z",
+ "total_tris": 123628,
+ "file_bytes": 5820268,
+ "props": [
+  {
+   "name": "barrel",
+   "size": [
+    0.6,
+    0.965,
+    0.6
+   ],
+   "bbox_min": [
+    -0.3,
+    0.0,
+    -0.3
+   ],
+   "bbox_max": [
+    0.3,
+    0.965,
+    0.3
+   ],
+   "tris": 998,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "barrel_tipped",
+   "size": [
+    1.694,
+    0.6,
+    1.132
+   ],
+   "bbox_min": [
+    -1.15,
+    0.0,
+    -0.432
+   ],
+   "bbox_max": [
+    0.544,
+    0.6,
+    0.7
+   ],
+   "tris": 1116,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_rust",
+    "rubber"
+   ]
+  },
+  {
+   "name": "body_bag",
+   "size": [
+    0.74,
+    0.296,
+    1.9
+   ],
+   "bbox_min": [
+    -0.37,
+    0.006,
+    -0.95
+   ],
+   "bbox_max": [
+    0.37,
+    0.302,
+    0.95
+   ],
+   "tris": 1298,
+   "children": [],
+   "materials": [
+    "cloth",
+    "metal_bare",
+    "rubber"
+   ]
+  },
+  {
+   "name": "bucket",
+   "size": [
+    0.376,
+    0.361,
+    0.354
+   ],
+   "bbox_min": [
+    -0.188,
+    0.0,
+    -0.177
+   ],
+   "bbox_max": [
+    0.188,
+    0.361,
+    0.177
+   ],
+   "tris": 723,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_rust",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cable_coil",
+   "size": [
+    1.082,
+    0.139,
+    0.944
+   ],
+   "bbox_min": [
+    -0.47,
+    0.001,
+    -0.482
+   ],
+   "bbox_max": [
+    0.612,
+    0.14,
+    0.462
+   ],
+   "tris": 1592,
+   "children": [],
+   "materials": [
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cable_floor_a",
+   "size": [
+    5.774,
+    0.205,
+    1.508
+   ],
+   "bbox_min": [
+    -2.885,
+    0.0,
+    -0.754
+   ],
+   "bbox_max": [
+    2.889,
+    0.205,
+    0.754
+   ],
+   "tris": 2136,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_red",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cable_floor_b",
+   "size": [
+    4.666,
+    0.271,
+    2.614
+   ],
+   "bbox_min": [
+    -2.33,
+    0.0,
+    -1.259
+   ],
+   "bbox_max": [
+    2.336,
+    0.271,
+    1.355
+   ],
+   "tris": 1336,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cable_floor_c",
+   "size": [
+    6.804,
+    0.45,
+    1.953
+   ],
+   "bbox_min": [
+    -3.351,
+    0.0,
+    -0.901
+   ],
+   "bbox_max": [
+    3.453,
+    0.45,
+    1.052
+   ],
+   "tris": 2082,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cable_hanging",
+   "size": [
+    6.42,
+    1.935,
+    0.7
+   ],
+   "bbox_min": [
+    -3.21,
+    3.265,
+    -0.35
+   ],
+   "bbox_max": [
+    3.21,
+    5.2,
+    0.35
+   ],
+   "tris": 2152,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "rubber"
+   ]
+  },
+  {
+   "name": "cart",
+   "size": [
+    1.0,
+    1.024,
+    1.56
+   ],
+   "bbox_min": [
+    -0.5,
+    0.0,
+    -0.79
+   ],
+   "bbox_max": [
+    0.5,
+    1.024,
+    0.77
+   ],
+   "tris": 2070,
+   "children": [],
+   "materials": [
+    "cloth",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow",
+    "rubber",
+    "wood"
+   ]
+  },
+  {
+   "name": "chain_hook",
+   "size": [
+    0.853,
+    5.221,
+    0.3
+   ],
+   "bbox_min": [
+    -0.25,
+    1.779,
+    -0.15
+   ],
+   "bbox_max": [
+    0.603,
+    7.0,
+    0.15
+   ],
+   "tris": 3090,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "cone",
+   "size": [
+    0.35,
+    0.61,
+    0.35
+   ],
+   "bbox_min": [
+    -0.175,
+    0.0,
+    -0.175
+   ],
+   "bbox_max": [
+    0.175,
+    0.61,
+    0.175
+   ],
+   "tris": 310,
+   "children": [],
+   "materials": [
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "control_console",
+   "size": [
+    1.8,
+    1.37,
+    0.96
+   ],
+   "bbox_min": [
+    -0.9,
+    0.0,
+    -0.49
+   ],
+   "bbox_max": [
+    0.9,
+    1.37,
+    0.47
+   ],
+   "tris": 1970,
+   "children": [],
+   "materials": [
+    "glow_amber",
+    "glow_cyan",
+    "glow_green",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_yellow",
+    "screen"
+   ]
+  },
+  {
+   "name": "conveyor",
+   "size": [
+    4.0,
+    1.029,
+    1.625
+   ],
+   "bbox_min": [
+    -2.0,
+    0.0,
+    -0.825
+   ],
+   "bbox_max": [
+    2.0,
+    1.029,
+    0.8
+   ],
+   "tris": 2864,
+   "children": [],
+   "materials": [
+    "belt",
+    "glow_amber",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "conveyor_end",
+   "size": [
+    1.255,
+    1.054,
+    1.62
+   ],
+   "bbox_min": [
+    -0.6,
+    0.0,
+    -0.8
+   ],
+   "bbox_max": [
+    0.655,
+    1.054,
+    0.82
+   ],
+   "tris": 2530,
+   "children": [],
+   "materials": [
+    "belt",
+    "glow_amber",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "crate_metal",
+   "size": [
+    1.25,
+    1.2,
+    1.235
+   ],
+   "bbox_min": [
+    -0.6,
+    0.0,
+    -0.6
+   ],
+   "bbox_max": [
+    0.65,
+    1.2,
+    0.635
+   ],
+   "tris": 1408,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "crate_small",
+   "size": [
+    0.75,
+    0.506,
+    0.512
+   ],
+   "bbox_min": [
+    -0.375,
+    0.0,
+    -0.25
+   ],
+   "bbox_max": [
+    0.375,
+    0.506,
+    0.262
+   ],
+   "tris": 362,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "crate_stack",
+   "size": [
+    2.727,
+    2.287,
+    1.713
+   ],
+   "bbox_min": [
+    -1.375,
+    0.0,
+    -0.863
+   ],
+   "bbox_max": [
+    1.352,
+    2.287,
+    0.85
+   ],
+   "tris": 4254,
+   "children": [],
+   "materials": [
+    "cloth",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "crucible",
+   "size": [
+    2.04,
+    4.8,
+    1.805
+   ],
+   "bbox_min": [
+    -1.02,
+    2.2,
+    -0.855
+   ],
+   "bbox_max": [
+    1.02,
+    7.0,
+    0.95
+   ],
+   "tris": 2274,
+   "children": [],
+   "materials": [
+    "glow_furnace",
+    "metal_bare",
+    "metal_dark",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "debris_a",
+   "size": [
+    1.506,
+    0.143,
+    1.496
+   ],
+   "bbox_min": [
+    -0.783,
+    0.0,
+    -0.767
+   ],
+   "bbox_max": [
+    0.723,
+    0.143,
+    0.729
+   ],
+   "tris": 658,
+   "children": [],
+   "materials": [
+    "concrete",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "debris_b",
+   "size": [
+    1.449,
+    0.433,
+    1.483
+   ],
+   "bbox_min": [
+    -0.682,
+    0.0,
+    -0.721
+   ],
+   "bbox_max": [
+    0.767,
+    0.433,
+    0.762
+   ],
+   "tris": 640,
+   "children": [],
+   "materials": [
+    "concrete",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "wood"
+   ]
+  },
+  {
+   "name": "debris_c",
+   "size": [
+    1.607,
+    0.158,
+    1.647
+   ],
+   "bbox_min": [
+    -0.792,
+    0.0,
+    -0.89
+   ],
+   "bbox_max": [
+    0.815,
+    0.158,
+    0.757
+   ],
+   "tris": 1088,
+   "children": [],
+   "materials": [
+    "concrete",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "rubber"
+   ]
+  },
+  {
+   "name": "door_frame",
+   "size": [
+    4.6,
+    4.56,
+    0.741
+   ],
+   "bbox_min": [
+    -2.3,
+    0.0,
+    -0.35
+   ],
+   "bbox_max": [
+    2.3,
+    4.56,
+    0.391
+   ],
+   "tris": 2402,
+   "children": [
+    "beacon"
+   ],
+   "materials": [
+    "concrete",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "door_shutter",
+   "size": [
+    4.02,
+    4.025,
+    0.218
+   ],
+   "bbox_min": [
+    -2.01,
+    0.0,
+    -0.075
+   ],
+   "bbox_max": [
+    2.01,
+    4.025,
+    0.143
+   ],
+   "tris": 2468,
+   "children": [],
+   "materials": [
+    "glass",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "duct",
+   "size": [
+    4.0,
+    3.97,
+    1.18
+   ],
+   "bbox_min": [
+    -2.0,
+    0.0,
+    -0.59
+   ],
+   "bbox_max": [
+    2.0,
+    3.97,
+    0.59
+   ],
+   "tris": 1520,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "electrical_box",
+   "size": [
+    0.9,
+    3.15,
+    0.42
+   ],
+   "bbox_min": [
+    -0.45,
+    0.15,
+    -0.0
+   ],
+   "bbox_max": [
+    0.45,
+    3.3,
+    0.42
+   ],
+   "tris": 1260,
+   "children": [
+    "lever"
+   ],
+   "materials": [
+    "glass",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "forklift",
+   "size": [
+    1.3,
+    2.33,
+    3.228
+   ],
+   "bbox_min": [
+    -0.65,
+    0.0,
+    -1.637
+   ],
+   "bbox_max": [
+    0.65,
+    2.33,
+    1.591
+   ],
+   "tris": 5476,
+   "children": [],
+   "materials": [
+    "glow_amber",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "furnace",
+   "size": [
+    4.48,
+    7.0,
+    3.55
+   ],
+   "bbox_min": [
+    -2.24,
+    0.0,
+    -1.8
+   ],
+   "bbox_max": [
+    2.24,
+    7.0,
+    1.75
+   ],
+   "tris": 6534,
+   "children": [],
+   "materials": [
+    "concrete",
+    "glow_furnace",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "gas_cylinder",
+   "size": [
+    0.26,
+    1.51,
+    0.26
+   ],
+   "bbox_min": [
+    -0.13,
+    0.0,
+    -0.13
+   ],
+   "bbox_max": [
+    0.13,
+    1.51,
+    0.13
+   ],
+   "tris": 520,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "generator",
+   "size": [
+    2.71,
+    1.958,
+    1.469
+   ],
+   "bbox_min": [
+    -1.41,
+    -0.008,
+    -0.7
+   ],
+   "bbox_max": [
+    1.3,
+    1.95,
+    0.769
+   ],
+   "tris": 4664,
+   "children": [],
+   "materials": [
+    "glow_amber",
+    "glow_cyan",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow",
+    "rubber",
+    "screen"
+   ]
+  },
+  {
+   "name": "keycard_reader",
+   "size": [
+    0.425,
+    1.33,
+    0.443
+   ],
+   "bbox_min": [
+    -0.2,
+    0.0,
+    -0.209
+   ],
+   "bbox_max": [
+    0.225,
+    1.33,
+    0.234
+   ],
+   "tris": 594,
+   "children": [],
+   "materials": [
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow",
+    "rubber",
+    "screen"
+   ]
+  },
+  {
+   "name": "ladder",
+   "size": [
+    0.51,
+    3.5,
+    0.106
+   ],
+   "bbox_min": [
+    -0.255,
+    0.0,
+    -0.055
+   ],
+   "bbox_max": [
+    0.255,
+    3.5,
+    0.051
+   ],
+   "tris": 544,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_rust",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "lamp_hanging",
+   "size": [
+    1.19,
+    2.52,
+    1.19
+   ],
+   "bbox_min": [
+    -0.595,
+    4.48,
+    -0.595
+   ],
+   "bbox_max": [
+    0.595,
+    7.0,
+    0.595
+   ],
+   "tris": 1248,
+   "children": [],
+   "materials": [
+    "glow_white",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "rubber"
+   ]
+  },
+  {
+   "name": "lamp_wall",
+   "size": [
+    0.34,
+    0.393,
+    0.28
+   ],
+   "bbox_min": [
+    -0.17,
+    2.63,
+    -0.0
+   ],
+   "bbox_max": [
+    0.17,
+    3.023,
+    0.28
+   ],
+   "tris": 772,
+   "children": [],
+   "materials": [
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate"
+   ]
+  },
+  {
+   "name": "lamp_work",
+   "size": [
+    1.1,
+    1.864,
+    1.635
+   ],
+   "bbox_min": [
+    -0.55,
+    0.0,
+    -1.005
+   ],
+   "bbox_max": [
+    0.55,
+    1.864,
+    0.63
+   ],
+   "tris": 1150,
+   "children": [],
+   "materials": [
+    "glow_white",
+    "metal_bare",
+    "metal_dark",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "locker_row",
+   "size": [
+    1.8,
+    2.0,
+    0.555
+   ],
+   "bbox_min": [
+    -0.9,
+    0.0,
+    -0.25
+   ],
+   "bbox_max": [
+    0.9,
+    2.0,
+    0.305
+   ],
+   "tris": 860,
+   "children": [],
+   "materials": [
+    "cloth",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "machine_a",
+   "size": [
+    3.68,
+    2.44,
+    1.833
+   ],
+   "bbox_min": [
+    -1.828,
+    0.0,
+    -0.9
+   ],
+   "bbox_max": [
+    1.852,
+    2.44,
+    0.933
+   ],
+   "tris": 5024,
+   "children": [],
+   "materials": [
+    "glass",
+    "glow_amber",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow",
+    "rubber",
+    "screen"
+   ]
+  },
+  {
+   "name": "machine_b",
+   "size": [
+    2.014,
+    3.29,
+    1.915
+   ],
+   "bbox_min": [
+    -0.991,
+    0.0,
+    -0.876
+   ],
+   "bbox_max": [
+    1.023,
+    3.29,
+    1.039
+   ],
+   "tris": 6148,
+   "children": [],
+   "materials": [
+    "glass",
+    "glow_amber",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "rubber"
+   ]
+  },
+  {
+   "name": "machine_press",
+   "size": [
+    3.3,
+    5.045,
+    3.022
+   ],
+   "bbox_min": [
+    -1.65,
+    0.0,
+    -1.511
+   ],
+   "bbox_max": [
+    1.65,
+    5.045,
+    1.511
+   ],
+   "tris": 8352,
+   "children": [
+    "piston"
+   ],
+   "materials": [
+    "glow_amber",
+    "glow_green",
+    "glow_red",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow",
+    "rubber",
+    "screen"
+   ]
+  },
+  {
+   "name": "pallet",
+   "size": [
+    1.22,
+    0.158,
+    1.13
+   ],
+   "bbox_min": [
+    -0.61,
+    0.0,
+    -0.5
+   ],
+   "bbox_max": [
+    0.61,
+    0.158,
+    0.63
+   ],
+   "tris": 618,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "wood"
+   ]
+  },
+  {
+   "name": "pickup_energy",
+   "size": [
+    0.202,
+    0.38,
+    0.202
+   ],
+   "bbox_min": [
+    -0.1,
+    0.0,
+    -0.101
+   ],
+   "bbox_max": [
+    0.102,
+    0.38,
+    0.101
+   ],
+   "tris": 478,
+   "children": [],
+   "materials": [
+    "glow_cyan",
+    "metal_bare",
+    "metal_dark"
+   ]
+  },
+  {
+   "name": "pickup_health",
+   "size": [
+    0.4,
+    0.242,
+    0.27
+   ],
+   "bbox_min": [
+    -0.2,
+    0.0,
+    -0.133
+   ],
+   "bbox_max": [
+    0.2,
+    0.242,
+    0.137
+   ],
+   "tris": 274,
+   "children": [],
+   "materials": [
+    "glow_green",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate"
+   ]
+  },
+  {
+   "name": "pickup_key",
+   "size": [
+    0.3,
+    0.02,
+    0.2
+   ],
+   "bbox_min": [
+    -0.15,
+    -0.007,
+    -0.1
+   ],
+   "bbox_max": [
+    0.15,
+    0.013,
+    0.1
+   ],
+   "tris": 72,
+   "children": [],
+   "materials": [
+    "glow_amber",
+    "metal_dark",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "pillar",
+   "size": [
+    0.8,
+    7.01,
+    0.8
+   ],
+   "bbox_min": [
+    -0.4,
+    0.0,
+    -0.4
+   ],
+   "bbox_max": [
+    0.4,
+    7.01,
+    0.4
+   ],
+   "tris": 2678,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "pipe_bundle",
+   "size": [
+    3.98,
+    2.649,
+    0.586
+   ],
+   "bbox_min": [
+    -1.99,
+    0.421,
+    -0.01
+   ],
+   "bbox_max": [
+    1.99,
+    3.07,
+    0.576
+   ],
+   "tris": 3188,
+   "children": [],
+   "materials": [
+    "glow_amber",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "rubber"
+   ]
+  },
+  {
+   "name": "pipe_elbow",
+   "size": [
+    1.515,
+    0.654,
+    1.515
+   ],
+   "bbox_min": [
+    -0.315,
+    0.0,
+    -0.315
+   ],
+   "bbox_max": [
+    1.2,
+    0.654,
+    1.2
+   ],
+   "tris": 2482,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "pipe_straight",
+   "size": [
+    4.0,
+    0.65,
+    0.63
+   ],
+   "bbox_min": [
+    -2.0,
+    0.0,
+    -0.315
+   ],
+   "bbox_max": [
+    2.0,
+    0.65,
+    0.315
+   ],
+   "tris": 2348,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "pipe_valve",
+   "size": [
+    1.216,
+    1.265,
+    0.56
+   ],
+   "bbox_min": [
+    -0.608,
+    0.0,
+    -0.28
+   ],
+   "bbox_max": [
+    0.608,
+    1.265,
+    0.28
+   ],
+   "tris": 2512,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red"
+   ]
+  },
+  {
+   "name": "pipe_vertical",
+   "size": [
+    0.6,
+    5.99,
+    0.684
+   ],
+   "bbox_min": [
+    -0.3,
+    0.01,
+    -0.0
+   ],
+   "bbox_max": [
+    0.3,
+    6.0,
+    0.684
+   ],
+   "tris": 3519,
+   "children": [],
+   "materials": [
+    "glass",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "railing",
+   "size": [
+    2.0,
+    1.11,
+    0.14
+   ],
+   "bbox_min": [
+    -1.0,
+    0.0,
+    -0.07
+   ],
+   "bbox_max": [
+    1.0,
+    1.11,
+    0.07
+   ],
+   "tris": 424,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "shelf_rack",
+   "size": [
+    2.702,
+    3.21,
+    0.948
+   ],
+   "bbox_min": [
+    -1.33,
+    0.0,
+    -0.474
+   ],
+   "bbox_max": [
+    1.372,
+    3.21,
+    0.474
+   ],
+   "tris": 4156,
+   "children": [],
+   "materials": [
+    "cloth",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow",
+    "wood"
+   ]
+  },
+  {
+   "name": "tank_horizontal",
+   "size": [
+    4.868,
+    2.289,
+    2.102
+   ],
+   "bbox_min": [
+    -2.434,
+    0.0,
+    -0.95
+   ],
+   "bbox_max": [
+    2.434,
+    2.289,
+    1.152
+   ],
+   "tris": 3780,
+   "children": [],
+   "materials": [
+    "concrete",
+    "glass",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "tank_vertical",
+   "size": [
+    3.159,
+    5.02,
+    2.635
+   ],
+   "bbox_min": [
+    -1.475,
+    0.0,
+    -1.23
+   ],
+   "bbox_max": [
+    1.684,
+    5.02,
+    1.405
+   ],
+   "tris": 4500,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "toolbox",
+   "size": [
+    0.62,
+    0.315,
+    0.257
+   ],
+   "bbox_min": [
+    -0.31,
+    0.0,
+    -0.125
+   ],
+   "bbox_max": [
+    0.31,
+    0.315,
+    0.132
+   ],
+   "tris": 368,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_red"
+   ]
+  },
+  {
+   "name": "vent_fan",
+   "size": [
+    2.52,
+    2.52,
+    0.585
+   ],
+   "bbox_min": [
+    -1.26,
+    1.24,
+    -0.0
+   ],
+   "bbox_max": [
+    1.26,
+    3.76,
+    0.585
+   ],
+   "tris": 3168,
+   "children": [
+    "blades"
+   ],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "wall_fusebox",
+   "size": [
+    0.823,
+    2.514,
+    0.319
+   ],
+   "bbox_min": [
+    -0.322,
+    0.018,
+    -0.0
+   ],
+   "bbox_max": [
+    0.501,
+    2.532,
+    0.319
+   ],
+   "tris": 604,
+   "children": [],
+   "materials": [
+    "glow_green",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_yellow",
+    "rubber"
+   ]
+  },
+  {
+   "name": "wall_sign",
+   "size": [
+    1.0,
+    0.7,
+    0.055
+   ],
+   "bbox_min": [
+    -0.5,
+    1.85,
+    -0.0
+   ],
+   "bbox_max": [
+    0.5,
+    2.55,
+    0.055
+   ],
+   "tris": 192,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_rust",
+    "metal_yellow"
+   ]
+  },
+  {
+   "name": "wall_vent",
+   "size": [
+    1.2,
+    1.2,
+    0.135
+   ],
+   "bbox_min": [
+    -0.6,
+    2.0,
+    -0.0
+   ],
+   "bbox_max": [
+    0.6,
+    3.2,
+    0.135
+   ],
+   "tris": 376,
+   "children": [],
+   "materials": [
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_rust"
+   ]
+  },
+  {
+   "name": "workbench",
+   "size": [
+    2.25,
+    1.14,
+    0.94
+   ],
+   "bbox_min": [
+    -1.15,
+    0.0,
+    -0.47
+   ],
+   "bbox_max": [
+    1.1,
+    1.14,
+    0.47
+   ],
+   "tris": 1404,
+   "children": [],
+   "materials": [
+    "glass",
+    "metal_bare",
+    "metal_dark",
+    "metal_plate",
+    "metal_red",
+    "rubber",
+    "wood"
+   ]
+  }
+ ]
+}
