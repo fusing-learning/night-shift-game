@@ -66,7 +66,15 @@ export class Game {
 
   // ───────── pickups ─────────
   buildPickups() { for (const p of PICKUPS) this.spawnPickup(p.kind, p.x, p.z, p.id, true); }
+  // nearest spot with room to stand, so drops never land inside props or walls
+  freeSpot(x, z) {
+    const g = this.grid, ok = (px, pz) => !g.isSolid(px, pz) && !g.isSolid(px + 0.4, pz) && !g.isSolid(px - 0.4, pz) && !g.isSolid(px, pz + 0.4) && !g.isSolid(px, pz - 0.4);
+    if (ok(x, z)) return [x, z];
+    for (let r = 0.5; r <= 4; r += 0.5) for (let a = 0; a < 12; a++) { const px = x + Math.cos(a / 12 * 6.283) * r, pz = z + Math.sin(a / 12 * 6.283) * r; if (ok(px, pz) && g.los(x, z, px, pz) !== undefined) return [px, pz]; }
+    return [this.player.x, this.player.z];
+  }
   spawnPickup(kind, x, z, id, fixed = false) {
+    if (!fixed) [x, z] = this.freeSpot(x, z);
     const name = { energy: 'pickup_energy', health: 'pickup_health', key: 'pickup_key' }[kind];
     let mesh = this.assets.makeProp(name);
     if (!mesh) { const col = { energy: 'glow_cyan', health: 'glow_green', key: 'glow_amber' }[kind]; mesh = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.35, 0.22), this.assets.mats[col]); mesh.geometry.translate(0, 0.18, 0); }
@@ -163,6 +171,8 @@ export class Game {
       this.brute = this.spawn(Brute, 30, 63.8, { facing: 0, wakeRange: 0 });
     } else if (z === Z.BOSS && !f.bossDead) {
       this.boss = this.spawn(Boss, 30, 21.5, { facing: 0 });
+      // quiet mercy: each death to the boss shaves a little off its health (down to 70%)
+      const k = Math.max(0.7, 1 - 0.08 * (this.bossRetries || 0)); this.boss.maxHp *= k; this.boss.hp = this.boss.maxHp;
     }
   }
   setObjective() {
@@ -243,7 +253,7 @@ export class Game {
     if (Math.random() < e.dropChance && e.type !== 'boss') this.spawnPickup(P.hp < 45 && Math.random() < 0.5 ? 'health' : 'energy', e.x, e.z);
   }
   onPlayerDeath() {
-    this.stats.deaths++; this.state = 'dead'; this.audio.setMusic('none', 0.3); this.audio.stopLoops(); this.audio.play('mus_death', { gain: 1 });
+    this.stats.deaths++; if (this.flags.boss > 0 && !this.flags.bossDead) this.bossRetries = (this.bossRetries || 0) + 1; this.state = 'dead'; this.audio.setMusic('none', 0.3); this.audio.stopLoops(); this.audio.play('mus_death', { gain: 1 });
     this.fadeTarget = 0.82; this.fadeSpeed = 0.5; this.fadeColor.setRGB(0.05, 0, 0);
     this.after(1.4, () => this.hud.showDeath(true));
   }

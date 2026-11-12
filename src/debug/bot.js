@@ -56,11 +56,12 @@ export class Bot {
     for (const w of G.weapons.waves) { const d = Math.hypot(P.x - w.x, P.z - w.z); if (d - w.r < 1.6 && d - w.r > -0.5 && P.dodgeCd <= 0 && w.damage > 0) { mx = w.x - P.x; mz = w.z - P.z; inp.pressed.add('ShiftLeft'); } }
     for (const p of G.weapons.puddles) { const d = Math.hypot(P.x - p.x, P.z - p.z); if (d < p.radius + 0.6) { mx += (P.x - p.x) / (d || 1) * 2; mz += (P.z - p.z) / (d || 1) * 2; } }
     // grab pickups when hurt / low
-    if (P.hp < 60 || P.energy < 40) for (const p of G.pickups) { if (p.taken) continue; if ((p.kind === 'health' && P.hp < 70) || (p.kind === 'energy' && P.energy < 50)) { const d = Math.hypot(p.x - P.x, p.z - P.z); if (d < 9 && G.grid.los(P.x, P.z, p.x, p.z) && (!near || nd > 3)) { mx = (p.x - P.x) / d; mz = (p.z - P.z) / d; } } }
+    if ((P.hp < 60 || P.energy < 40) && !(this.giveUp > 0)) for (const p of G.pickups) { if (p.taken) continue; if ((p.kind === 'health' && P.hp < 70) || (p.kind === 'energy' && P.energy < 50)) { const d = Math.hypot(p.x - P.x, p.z - P.z); if (d < 9 && G.grid.los(P.x, P.z, p.x, p.z) && (!near || nd > 3)) { mx = (p.x - P.x) / d; mz = (p.z - P.z) / d; } } }
     if (goal.use && dGoal < 1.5) inp.pressed.add('KeyE');
     if (mz < -0.3) K.add('KeyW'); if (mz > 0.3) K.add('KeyS'); if (mx < -0.3) K.add('KeyA'); if (mx > 0.3) K.add('KeyD');
     inp.aimOverride = { x: aimX, z: aimZ };
     // unstick
-    this.stuckT += dt; if (this.stuckT > 2) { if (Math.hypot(P.x - this.lx, P.z - this.lz) < 0.3 && dGoal > 2 && !near) { inp.pressed.add('ShiftLeft'); this.strafe *= -1; } this.lx = P.x; this.lz = P.z; this.stuckT = 0; }
+    this.giveUp = (this.giveUp || 0) - dt;
+    this.stuckT += dt; if (this.stuckT > 2) { if (Math.hypot(P.x - this.lx, P.z - this.lz) < 0.3 && dGoal > 2 && !near) { inp.pressed.add('ShiftLeft'); this.strafe *= -1; this.giveUp = 6; } this.lx = P.x; this.lz = P.z; this.stuckT = 0; }
   }
 }

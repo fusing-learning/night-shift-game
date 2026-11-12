@@ -203,13 +203,14 @@ export class Weapons {
     const c = color || new THREE.Color(2.2, 0.22, 0.08);
     const ring = new THREE.Mesh(this.ringGeo, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.9, depthWrite: false, blending: THREE.AdditiveBlending }));
     const fill = new THREE.Mesh(this.discGeo, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0.1, depthWrite: false, blending: THREE.AdditiveBlending }));
-    ring.scale.setScalar(radius); mesh.add(ring, fill); mesh.position.set(x, 0.05, z); G.scene.add(mesh);
-    const m = { mesh, ring, fill, x, z, radius, t: 0, dur }; this.marks.push(m); return m;
+    const grow = new THREE.Mesh(this.ringGeo, ring.material);
+    ring.scale.setScalar(radius); mesh.add(ring, fill, grow); mesh.position.set(x, 0.05, z); G.scene.add(mesh);
+    const m = { mesh, ring, fill, grow, x, z, radius, t: 0, dur }; this.marks.push(m); return m;
   }
   updateMarks(dt) {
     for (let i = this.marks.length - 1; i >= 0; i--) {
       const m = this.marks[i]; m.t += dt; const k = Math.min(1, m.t / m.dur);
-      m.fill.scale.setScalar(m.radius * k); m.fill.material.opacity = 0.05 + 0.16 * k; m.ring.material.opacity = 0.5 + 0.5 * Math.sin(m.t * 26) * k;
+      m.fill.scale.setScalar(m.radius); m.fill.material.opacity = 0.03 + 0.07 * k; m.grow.scale.setScalar(Math.max(0.01, m.radius * k)); m.ring.material.opacity = 0.5 + 0.5 * Math.sin(m.t * 26) * k;
       if (m.t >= m.dur + 0.06) { this.G.scene.remove(m.mesh); this.marks.splice(i, 1); }
     }
   }

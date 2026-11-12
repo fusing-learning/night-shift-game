@@ -86,7 +86,7 @@ export class Boss extends Enemy {
     // aim at the player, clamped to arm reach
     let dx = P.x + P.vx * 0.25 - this.x, dz = P.z + P.vz * 0.25 - this.z; const d = Math.hypot(dx, dz) || 1; const reach = Math.max(3.2, Math.min(6.4, d));
     this.slamTarget.set(this.x + dx / d * reach, 0, this.z + dz / d * reach);
-    this.windTime = this.phase >= 3 ? 0.62 : (this.phase === 2 ? 0.78 : 0.92);
+    this.windTime = this.phase >= 3 ? 0.66 : (this.phase === 2 ? 0.84 : 1.0);
     this.marker = G.weapons.telegraph(this.slamTarget.x, this.slamTarget.z, 3.1, this.windTime);
     if (this.arms) { const l = this.arms.legs[this.armSide]; this.raise.set((this.x + this.slamTarget.x) / 2, 4.2, (this.z + this.slamTarget.z) / 2); l.override = this.raise; l.overrideRate = 7; }
   }
@@ -136,7 +136,7 @@ export class Boss extends Enemy {
         this.brake(dt, 5); this.face(Math.atan2(this.slamTarget.x - this.x, this.slamTarget.z - this.z), dt, 2.5);
         if (this.stateT >= this.windTime) {
           const t = this.slamTarget; if (this.arms) { const l = this.arms.legs[this.armSide]; l.override = t; l.overrideRate = 38; }
-          if (Math.hypot(P.x - t.x, P.z - t.z) < 3.1 + P.radius * 0.5) P.damage(26, t.x, t.z, 11);
+          if (Math.hypot(P.x - t.x, P.z - t.z) < 3.1 + P.radius * 0.5) P.damage(24, t.x, t.z, 11);
           G.weapons.shockwave(t.x, t.z, 9.5, 10, 10);
           G.shake(1.3); G.hitStop(0.05); G.audio.play('boss_slam', { x: t.x, z: t.z });
           G.particles.sparks(t.x, 0.3, t.z, 0, 0, 40, [1.4, 0.9, 0.4], 9); G.particles.smoke(t.x, 0.4, t.z, 12, 1.3, [0.45, 0.42, 0.45], 1.4, 0.4);
@@ -210,7 +210,7 @@ export class Boss extends Enemy {
 
   animate(dt) {
     const G = this.G; const t = this.age;
-    const hot = 2.2 + this.glow * 7 + (this.phase - 1) * 1.2 + Math.sin(t * 5) * 0.4;
+    const hot = 1.1 + this.glow * 3.6 + (this.phase - 1) * 0.6 + Math.sin(t * 5) * 0.2;
     if (this.furnaceMat) this.furnaceMat.emissiveIntensity = this.state === 'dormant' ? 0.5 + Math.sin(t * 1.2) * 0.2 : hot;
     if (this.sacMat) this.sacMat.emissiveIntensity = 0.8 + Math.sin(t * 2.5) * 0.3 + this.fury * 4;
     if (this.eyeMat) this.eyeMat.emissiveIntensity = this.state === 'dormant' ? 0 : 3 + this.phase;
