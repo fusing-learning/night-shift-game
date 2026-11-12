@@ -25,8 +25,8 @@ export const PLAYER = {
 export const GUN = {
   energyMax: 100,
   shotCost: 5,
-  regenDelay: 1.1,
-  regenRate: 7,
+  regenDelay: 0.9,
+  regenRate: 8,
   fireInterval: 0.17,
   heatPerShot: 0.105,
   coolRate: 0.55,

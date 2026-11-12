@@ -26,7 +26,7 @@ export class LightRig {
   constructor(scene, fixtures) {
     this.scene = scene; this.fixtures = fixtures; this.byId = {};
     this.time = 0; this.shaftGain = 0.007;
-    this.hemi = new THREE.HemisphereLight(0x22364f, 0x04060a, 0.4);
+    this.hemi = new THREE.HemisphereLight(0x263c56, 0x05080c, 0.62);
     scene.add(this.hemi);
 
     // player flashlight
@@ -37,6 +37,8 @@ export class LightRig {
     this.flashOn = true; this.flashBase = 52; this.flashFlicker = 1;
     this.flashPos = new THREE.Vector3(); this.flashDir = new THREE.Vector3(0, 0, -1);
 
+    // faint warm lamp on the player's suit so they never vanish completely
+    this.suit = new THREE.PointLight(0xffb060, 0.9, 3.2, 1.4); scene.add(this.suit);
     this.spots = [];
     for (let i = 0; i < N_SPOT; i++) {
       const l = new THREE.SpotLight(0xffffff, 0, 20, 0.6, 0.9, 1.5);
@@ -68,7 +70,7 @@ export class LightRig {
         cone.position.set(f.px, f.y, f.pz); cone.scale.set(rad, lampY, rad); cone.renderOrder = 5;
         cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, -1, 0), f.dir);
         scene.add(cone);
-      } else { s.position.set(f.x, f.y, f.z); s.scale.setScalar(f.fire ? 0.01 : 0.9); }
+      } else { s.position.set(f.x, f.y, f.z); s.scale.setScalar(f.fire ? 0.01 : 0.6); }
       scene.add(s);
     }
     // uniforms shared with lit particles / dust
@@ -95,7 +97,7 @@ export class LightRig {
   setFlashlight(origin, dir, on) {
     this.flashOn = on;
     this.flashPos.copy(origin); this.flashDir.copy(dir).normalize();
-    this.flash.position.copy(origin);
+    this.flash.position.copy(origin); this.suit.position.set(origin.x, 1.1, origin.z);
     this.flash.target.position.copy(origin).addScaledVector(this.flashDir, 6);
     this.flash.target.updateMatrixWorld();
   }

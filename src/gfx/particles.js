@@ -127,10 +127,10 @@ export class Particles {
       const a = Math.random() * 6.283, s = speed * (0.2 + Math.random());
       this.lit.emit(x + (Math.random() - 0.5) * 0.2, y + Math.random() * 0.3, z + (Math.random() - 0.5) * 0.2,
         dx * s * 0.8 + Math.cos(a) * s * 0.5, 1 + Math.random() * 4.5, dz * s * 0.8 + Math.sin(a) * s * 0.5,
-        0.6 + Math.random() * 0.6, 0.07 + Math.random() * 0.09, 0.04, color[0] * 2, color[1] * 2, color[2] * 2, 1, 13, 0.6, Math.random() < 0.55 ? 1 : 0);
+        0.6 + Math.random() * 0.6, 0.07 + Math.random() * 0.09, 0.04, color[0] * 0.9, color[1] * 0.9, color[2] * 0.9, 1, 13, 0.6, Math.random() < 0.55 ? 1 : 0);
     }
     for (let i = 0; i < Math.ceil(n / 5); i++) {  // red mist
-      this.lit.emit(x, y + 0.2, z, dx * 1.5 + (Math.random() - 0.5), 0.5 + Math.random(), dz * 1.5 + (Math.random() - 0.5), 0.5 + Math.random() * 0.4, 0.3, 1.1, color[0] * 1.5, color[1] * 1.5, color[2] * 1.5, 0.35, 0, 2.5, 2);
+      this.lit.emit(x, y + 0.2, z, dx * 1.5 + (Math.random() - 0.5), 0.5 + Math.random(), dz * 1.5 + (Math.random() - 0.5), 0.5 + Math.random() * 0.4, 0.3, 1.1, color[0] * 0.7, color[1] * 0.7, color[2] * 0.7, 0.22, 0, 2.5, 2);
     }
   }
   smoke(x, y, z, n = 4, size = 0.6, color = [0.5, 0.55, 0.6], rise = 0.8, a = 0.25) {
@@ -192,7 +192,7 @@ export class Decals {
     set.mesh.setMatrixAt(i, this.m); set.mesh.setColorAt(i, this.c.setRGB(color[0], color[1], color[2]));
     set.mesh.instanceMatrix.needsUpdate = true; set.mesh.instanceColor.needsUpdate = true;
   }
-  splat(x, z, size = 1, color = [0.22, 0.004, 0.004]) { this.place(this.blood[(Math.random() * 3) | 0], x, z, size * (0.7 + Math.random() * 0.7), color); }
+  splat(x, z, size = 1, color = [0.07, 0.002, 0.002]) { this.place(this.blood[(Math.random() * 3) | 0], x, z, size * (0.7 + Math.random() * 0.7), color); }
   burn(x, z, size = 0.8) { this.place(this.scorch, x, z, size * 0.75, [0, 0, 0]); }
   clear() { const z = new THREE.Matrix4().makeScale(0, 0, 0); for (const s of [...this.blood, this.scorch]) { for (let i = 0; i < s.n; i++) s.mesh.setMatrixAt(i, z); s.mesh.instanceMatrix.needsUpdate = true; } }
 }

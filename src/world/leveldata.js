@@ -221,9 +221,9 @@ export const LIGHTS = [
 
 export const PICKUPS = [
   { kind: 'energy', x: 38.4, z: 161 }, { kind: 'key', x: 12, z: 157.3, id: 'keycard' },
-  { kind: 'health', x: 47.4, z: 113.6 }, { kind: 'energy', x: 13.2, z: 134.6 }, { kind: 'energy', x: 53.2, z: 128.4 },
-  { kind: 'health', x: 46.4, z: 107 }, { kind: 'energy', x: 14, z: 90 }, { kind: 'energy', x: 40.4, z: 100.6 },
-  { kind: 'energy', x: 45, z: 83 }, { kind: 'health', x: 15.4, z: 62 }, { kind: 'energy', x: 33.6, z: 62.4 },
+  { kind: 'health', x: 47.4, z: 113.6 }, { kind: 'energy', x: 13.2, z: 134.6 }, { kind: 'energy', x: 57.6, z: 123.4 },
+  { kind: 'health', x: 44.4, z: 105.6 }, { kind: 'energy', x: 14, z: 90 }, { kind: 'energy', x: 40.4, z: 100.6 },
+  { kind: 'energy', x: 41, z: 82.6 }, { kind: 'health', x: 15.4, z: 62 }, { kind: 'energy', x: 33.6, z: 62.4 },
   { kind: 'health', x: 25, z: 52 }, { kind: 'energy', x: 35, z: 52 }, { kind: 'energy', x: 33.4, z: 54.6 }, { kind: 'health', x: 27, z: 49.6 },
 ];
 

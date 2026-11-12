@@ -157,7 +157,7 @@ export class Player {
     // blade
     if (can && inp.melee && this.bladeCd <= 0 && this.dodgeT <= 0) {
       this.bladeT = BLADE.swingTime; this.bladeCd = BLADE.cooldown; this.bladeHit = false; this.bladeSide = -this.bladeSide; this.bladeGlow = 1;
-      G.audio.play('blade_swing', { gain: 0.9, rate: 0.95 + Math.random() * 0.1 });
+      G.audio.play('blade_swing', { gain: 0.9, rate: 0.95 + Math.random() * 0.1 }); G.audio.play('blade_ignite', { gain: 0.35, rate: 1.3 });
       G.lights.burst(this.x + fx, 0.8, this.z + fz, 0x40d8ff, 26, 7, 0.22);
     }
     if (this.bladeT > 0) {

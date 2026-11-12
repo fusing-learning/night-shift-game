@@ -46,7 +46,7 @@ export class Game {
   }
 
   freshFlags() { return { key: false, door1: false, scare: 0, power: false, ambush: 0, asmCleared: false, whStalker: false, arena: 0, arenaCleared: false, door4: false, boss: 0, bossDead: false, hints: {} }; }
-  onResize() { this.particles.setScale(innerHeight * Math.min(devicePixelRatio || 1, 1.5) * this.gfx.quality, CAM.fov * Math.PI / 180); }
+  onResize() { this.particles.setScale(innerHeight * Math.min(devicePixelRatio || 1, 2) * this.gfx.quality, CAM.fov * Math.PI / 180); }
 
   // ───────── helpers used by entities ─────────
   shake(a) { this.trauma = Math.min(1.6, this.trauma + a); }
@@ -113,7 +113,7 @@ export class Game {
     }
     this.flags = JSON.parse(JSON.stringify(this.cpFlags));
     for (const e of this.enemies) e.remove(); this.enemies.length = 0;
-    this.weapons.clear(); this.gibs.clear(); this.timers.length = 0; this.cutscene = null; this.letterbox = 0; this.boss = null;
+    this.weapons.clear(); this.gibs.clear(); this.timers.length = 0; this.ambushT = 0; this.arenaT = 0; this.cutscene = null; this.letterbox = 0; this.boss = null;
     if (this.decoy) { this.scene.remove(this.decoy.root); this.decoy = null; }
     for (let i = this.pickups.length - 1; i >= 0; i--) {
       const p = this.pickups[i];
@@ -181,7 +181,7 @@ export class Game {
     this.after(0.9, () => { for (const fx of this.lights.fixtures) if (fx.zone === Z.DOCK) fx.dim = 1; });
     this.after(0.5, () => {
       this.audio.play('steam_burst', { x: 18.5, z: 155.5 }); this.particles.smoke(18.6, 2.4, 155.5, 10, 0.8, [0.5, 0.55, 0.6], 0.6, 0.4);
-      for (const [x, z] of [[19.4, 155.2], [19.8, 156.8], [20.4, 154.4]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true, silent: false });
+      for (const [x, z] of [[19.4, 155.2], [19.8, 156.8], [20.4, 154.4], [21.2, 156]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true, silent: false });
     });
   }
   useKeycard() {
@@ -197,7 +197,7 @@ export class Game {
     f.ambush = 1;
     this.after(3.2, () => {
       this.audio.play('stinger_scare', { gain: 0.8 }); this.audio.play('steam_burst', { x: 11, z: 119.5 });
-      for (const [x, z] of [[11.6, 119.4], [12.4, 120.6], [12.2, 118.4]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true, ambush: true }).ambush = true;
+      for (const [x, z] of [[11.6, 120.2], [12.6, 121.4], [11.8, 122.4]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true, ambush: true }).ambush = true;
       this.spawn(Spitter, 24.6, 114, { alert: true, spawnFx: true }).ambush = true;
       f.ambush = 2;
     });
@@ -216,7 +216,7 @@ export class Game {
   arenaWave2() {
     const f = this.flags; f.arena = 2; this.audio.play('stinger_scare', { gain: 0.7 });
     this.spawn(Spitter, 16.4, 63.4, { alert: true, spawnFx: true }); this.spawn(Spitter, 43.6, 80.6, { alert: true, spawnFx: true });
-    this.after(1.5, () => { for (const [x, z] of [[26, 62.4], [34, 62.4], [44, 66.6], [16, 77]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true }); f.arena = 3; });
+    this.after(1.5, () => { for (const [x, z] of [[26, 62.4], [34, 62.4], [44, 66.6], [16, 77], [44, 78], [16, 66]]) this.spawn(Crawler, x, z, { alert: true, spawnFx: true }); this.spawn(Stalker, 45, 62.6, { alert: true, spawnFx: true, silent: false }); f.arena = 3; });
   }
   startBoss() {
     const f = this.flags, B = this.boss; f.boss = 1; this.applyFlags(); this.audio.play('brute_slam', { x: 30, z: 47, gain: 0.8 });
@@ -250,8 +250,10 @@ export class Game {
   respawn() {
     this.hud.showDeath(false); this.fade = 1; this.fadeTarget = 0; this.fadeSpeed = 1.2; this.fadeColor.setRGB(0, 0, 0);
     this.loadCheckpoint(this.checkpoint); this.state = 'play'; this.audio.setMusic('explore');
+    this.input.buttons = 0; this.input.clicked = 0; this.player.fireT = 0.5; this.player.bladeCd = 0.5;
   }
   begin() {
+    this.input.buttons = 0; this.input.clicked = 0; this.input.pressed.clear(); this.player.fireT = 0.6; this.player.bladeCd = 0.6;   // the starting click must not fire
     this.state = 'play'; this.fadeTarget = 0; this.fadeSpeed = 0.5; this.audio.play('ui_start'); this.audio.setMusic('explore', 2.5);
     this.after(1.5, () => this.hud.hint('WASD  MOVE      MOUSE  AIM      LMB  FIRE', 6));
     this.after(8.5, () => this.hud.hint('RMB / SPACE  BLADE      SHIFT  DODGE      F  TORCH', 6));
@@ -279,6 +281,8 @@ export class Game {
       this.after(0.7, () => { L.setFixture('corridorScare', { dim: 1 }); this.audio.play('stalker_whisper', { x: 30, z: 132, gain: 0.8 }); });
     }
     // assembly ambush -> shutter
+    if (f.ambush === 3 && !f.asmCleared) { this.ambushT = (this.ambushT || 0) + dt; if (this.ambushT > 70) for (const e of this.enemies) if (e.ambush && !e.dead) e.die(0, 0); }
+    if (f.arena === 3 && !f.arenaCleared) { this.arenaT = (this.arenaT || 0) + dt; if (this.arenaT > 150) for (const e of this.enemies) if (e.zone === Z.FURNACE && !e.dead) e.die(0, 0); }
     if (f.ambush === 3 && !f.asmCleared && !this.enemies.some((e) => e.ambush && !e.dead)) {
       f.asmCleared = true; this.audio.play('door_open', { x: 42, z: 111 }); this.applyFlags(); this.setObjective(); this.hud.toast('SHUTTER RELEASED');
     }
@@ -316,7 +320,7 @@ export class Game {
     if (this.flags.boss >= 1 && !this.flags.bossDead) return;      // boss music is scripted
     if (this.flags.bossDead) return;
     let near = 0, hot = 0;
-    for (const e of this.enemies) { if (e.dead || e.untargetable && e.type !== 'boss') continue; const d = e.distToPlayer; if (e.alerted && d < 22 && e.type !== 'stalker') hot++; else if (d < 15 || (e.alerted && d < 25)) near++; }
+    for (const e of this.enemies) { if (e.dead || e.untargetable && e.type !== 'boss') continue; const d = e.distToPlayer; if (e.alerted && d < 22 && e.type !== 'stalker') hot++; else if (d < 10 || (e.alerted && d < 25)) near++; }
     if (hot > 0) this.combatT = 3; else this.combatT -= 0.3;
     A.setMusic(this.combatT > 0 ? 'combat' : (near > 0 ? 'tension' : 'explore'), 1.5);
     // sparse world one-shots

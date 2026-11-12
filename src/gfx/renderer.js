@@ -3,6 +3,7 @@ import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { GTAOPass } from 'three/addons/postprocessing/GTAOPass.js';
 
 // Final grade: tone map, cold tint, vignette, grain, chromatic aberration, damage + fades.
 const FinalShader = {
@@ -39,7 +40,7 @@ const FinalShader = {
       float v = smoothstep(0.95, 0.12, r2 * 2.3 * uVignette);
       col *= mix(0.04, 1.0, v);
       // damage + low health: red creeping in from the edges
-      float edge = smoothstep(0.05, 0.42, r2);
+      float edge = smoothstep(0.13, 0.5, r2);
       col = mix(col, vec3(0.55, 0.0, 0.0), edge * clamp(uDamage*0.85 + uLowHealth*(0.28+0.12*sin(uTime*5.0)), 0.0, 0.9));
       // film grain
       float g = hash(gl_FragCoord.xy + fract(uTime*7.31)*917.0) - 0.5;
@@ -68,6 +69,12 @@ export class Gfx {
     const rt = new THREE.WebGLRenderTarget(4, 4, { type: THREE.HalfFloatType, samples: 4 });
     this.composer = new EffectComposer(r, rt);
     this.composer.addPass(new RenderPass(this.scene, this.camera));
+    if (!new URLSearchParams(location.search).has('noao')) {
+      this.ao = new GTAOPass(this.scene, this.camera, 256, 256);
+      this.ao.updateGtaoMaterial({ radius: 0.7, distanceExponent: 1.4, thickness: 1.4, scale: 1.25, samples: 12, screenSpaceRadius: false });
+      this.ao.blendIntensity = 1.0;
+      this.composer.addPass(this.ao);
+    }
     this.bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), 0.5, 0.7, 1.0);
     this.composer.addPass(this.bloom);
     this.final = new ShaderPass(FinalShader);
@@ -78,7 +85,7 @@ export class Gfx {
   }
   resize() {
     const w = innerWidth, h = innerHeight;
-    const pr = Math.min(devicePixelRatio || 1, 1.5) * this.quality;
+    const pr = Math.min(devicePixelRatio || 1, 2) * this.quality;
     this.renderer.setPixelRatio(pr); this.renderer.setSize(w, h, false);
     this.composer.setPixelRatio(pr); this.composer.setSize(w, h);
     this.camera.aspect = w / h; this.camera.updateProjectionMatrix();

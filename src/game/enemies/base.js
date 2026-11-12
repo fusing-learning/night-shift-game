@@ -111,7 +111,7 @@ export class Enemy {
     if (this.hp <= 0) this.die(dx, dz);
   }
   onDamage() {}
-  decalColor() { return [this.bloodColor[0] * 0.42, this.bloodColor[1] * 0.3, this.bloodColor[2] * 0.3]; }
+  decalColor() { return [this.bloodColor[0] * 0.14, this.bloodColor[1] * 0.14, this.bloodColor[2] * 0.14]; }
 
   die(dx = 0, dz = 0) {
     if (this.dead) return;

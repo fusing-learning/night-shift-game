@@ -8,7 +8,7 @@ const _v = new THREE.Vector3(), _c = { x: 0, z: 0 };
 export class Boss extends Enemy {
   constructor(G, x, z, o = {}) {
     super(G, 'boss', x, z, { ...o, dormant: true });
-    this.radius = 2.5; this.gridRadius = 1.7; this.hp = this.maxHp = 2600; this.mass = 200; this.height = 1.5; this.wakeRange = 0;
+    this.radius = 2.5; this.gridRadius = 1.7; this.hp = this.maxHp = 2000; this.mass = 200; this.height = 1.5; this.wakeRange = 0;
     this.phase = 1; this.gap = 1.5; this.spawnT = 0; this.spawnCd = 9; this.turnRate = 1.5; this.noSeparate = true; this.corpse = true; this.gibCount = 0;
     this.armSide = 0; this.combo = 0; this.chargeDir = { x: 0, z: 1 }; this.hitDone = false; this.fury = 0; this.volleyLeft = 0; this.volleyT = 0; this.ringsLeft = 0; this.ringT = 0;
     this.marker = null; this.slamTarget = new THREE.Vector3(); this.raise = new THREE.Vector3(); this.glow = 0; this.hurtT = 0; this.rear = 0; this.dying = 0; this.lastAttack = '';
@@ -41,6 +41,9 @@ export class Boss extends Enemy {
     const G = this.G; this.phase = n; this.setState('phase'); this.untargetable = true; this.endOverride(); this.vx = this.vz = 0;
     if (this.marker) { this.marker.t = this.marker.dur; this.marker = null; }
     G.audio.play('boss_phase', { gain: 1 }); G.shake(1.4); G.onBossPhase(n);
+    // it coughs up supplies as it tears itself open
+    const P = G.player, a = Math.atan2(P.x - this.x, P.z - this.z);
+    for (const [kind, off] of [['health', 0.5], ['energy', -0.5]]) { let px = this.x + Math.sin(a + off) * 5.5, pz = this.z + Math.cos(a + off) * 5.5; if (G.grid.isSolid(px, pz)) { px = P.x; pz = P.z; } G.spawnPickup(kind, px, pz); }
     this.turnRate = n === 2 ? 1.9 : 2.4;
   }
   die() {
@@ -59,7 +62,7 @@ export class Boss extends Enemy {
     for (let i = 0; i < n; i++) {
       const a = this.facing + Math.PI + (i - (n - 1) / 2) * 0.7 + (Math.random() - 0.5) * 0.3; let px = this.x + Math.sin(a) * 3.2, pz = this.z + Math.cos(a) * 3.2;
       if (G.grid.isSolid(px, pz)) { px = this.x + Math.sin(a) * 2; pz = this.z + Math.cos(a) * 2; }
-      const c = new Crawler(G, px, pz, { dormant: false, spawnFx: true, zone: this.zone }); c.alert(true); c.fromBoss = true; G.enemies.push(c);
+      const c = new Crawler(G, px, pz, { dormant: false, spawnFx: true, zone: this.zone }); c.alert(true); c.fromBoss = true; c.dropChance = 0.6; G.enemies.push(c);
     }
     this.fury = 1;
   }
@@ -133,8 +136,8 @@ export class Boss extends Enemy {
         this.brake(dt, 5); this.face(Math.atan2(this.slamTarget.x - this.x, this.slamTarget.z - this.z), dt, 2.5);
         if (this.stateT >= this.windTime) {
           const t = this.slamTarget; if (this.arms) { const l = this.arms.legs[this.armSide]; l.override = t; l.overrideRate = 38; }
-          if (Math.hypot(P.x - t.x, P.z - t.z) < 3.1 + P.radius * 0.5) P.damage(30, t.x, t.z, 11);
-          G.weapons.shockwave(t.x, t.z, 9.5, 11, 14);
+          if (Math.hypot(P.x - t.x, P.z - t.z) < 3.1 + P.radius * 0.5) P.damage(26, t.x, t.z, 11);
+          G.weapons.shockwave(t.x, t.z, 9.5, 10, 10);
           G.shake(1.3); G.hitStop(0.05); G.audio.play('boss_slam', { x: t.x, z: t.z });
           G.particles.sparks(t.x, 0.3, t.z, 0, 0, 40, [1.4, 0.9, 0.4], 9); G.particles.smoke(t.x, 0.4, t.z, 12, 1.3, [0.45, 0.42, 0.45], 1.4, 0.4);
           G.lights.burst(t.x, 1.5, t.z, 0xffb060, 90, 14, 0.25); G.decals.burn(t.x, t.z, 4.5);
@@ -152,7 +155,7 @@ export class Boss extends Enemy {
         break;
       case 'volleyWind':
         this.brake(dt, 4); this.facePlayer(dt, 2.5); this.glow = damp(this.glow, 1, 6, dt); this.rear = 0.6;
-        if (this.stateT > 0.8) { this.volleyLeft = [0, 5, 7, 9][this.phase]; this.volleyT = 0; this.setState('volley'); }
+        if (this.stateT > 0.8) { this.volleyLeft = [0, 4, 6, 7][this.phase]; this.volleyT = 0; this.setState('volley'); }
         break;
       case 'volley':
         this.brake(dt, 4); this.facePlayer(dt, 1.5); this.glow = 1; this.volleyT -= dt;
@@ -160,7 +163,7 @@ export class Boss extends Enemy {
           this.volleyLeft--; this.volleyT = 0.14;
           const m = this.furnacePos(_v); const sp = 3.4 + this.phase;
           const tx = P.x + P.vx * 0.7 + (Math.random() - 0.5) * sp * 2, tz = P.z + P.vz * 0.7 + (Math.random() - 0.5) * sp * 2;
-          G.weapons.lob(m.x, m.y, m.z, tx, tz, 0.95 + Math.random() * 0.35, { radius: 1.5, damage: 16, puddle: 3, fire: true, size: 1.3 });
+          G.weapons.lob(m.x, m.y, m.z, tx, tz, 0.95 + Math.random() * 0.35, { radius: 1.45, damage: 13, puddle: 2.5, fire: true, size: 1.3 });
           G.audio.play('boss_spit', { x: this.x, z: this.z, gain: 0.7, rate: 0.95 + Math.random() * 0.2 }); G.particles.embers(m.x, m.y, m.z, 6, 0.6); G.lights.burst(m.x, m.y, m.z, 0xff6a18, 40, 9, 0.12);
         }
         if (this.volleyLeft <= 0 && this.volleyT <= -0.3) { this.setState('recover'); this.recoverT = 0.9; }
@@ -176,7 +179,7 @@ export class Boss extends Enemy {
       case 'charge': {
         this.marker = null; this.vx = this.chargeDir.x * 13; this.vz = this.chargeDir.z * 13;
         if (Math.random() < 0.7) G.particles.smoke(this.x + (Math.random() - 0.5) * 3, 0.3, this.z + (Math.random() - 0.5) * 3, 1, 1, [0.4, 0.38, 0.4], 0.6, 0.25);
-        if (!this.hitDone && d < this.radius + P.radius + 0.2) { this.hitDone = true; P.damage(30, this.x - this.chargeDir.x, this.z - this.chargeDir.z, 13); }
+        if (!this.hitDone && d < this.radius + P.radius + 0.2) { this.hitDone = true; P.damage(26, this.x - this.chargeDir.x, this.z - this.chargeDir.z, 13); }
         const blocked = this.lastHitWall && (G.grid.hitNx * this.chargeDir.x + G.grid.hitNz * this.chargeDir.z) < -0.4;
         if ((blocked && this.stateT > 0.15) || this.stateT > 1.25) {
           if (blocked) { G.shake(1.2); G.audio.play('boss_slam', { x: this.x, z: this.z, rate: 0.8 }); G.particles.sparks(this.x + this.chargeDir.x * 2, 1.5, this.z + this.chargeDir.z * 2, -this.chargeDir.x, -this.chargeDir.z, 40, [1.3, 1, 0.6], 9); }
@@ -191,8 +194,8 @@ export class Boss extends Enemy {
       case 'ring':
         this.brake(dt, 6); this.glow = 1; this.ringT -= dt;
         if (this.ringT <= 0 && this.ringsLeft > 0) {
-          const k = 3 - this.ringsLeft; this.ringsLeft--; this.ringT = 0.62; const n = 14;
-          for (let i = 0; i < n; i++) { const a = (i + k * 0.5) / n * 6.283; G.weapons.fireball(this.x + Math.sin(a) * 2.4, this.z + Math.cos(a) * 2.4, Math.sin(a), Math.cos(a), 5.6, { damage: 12 }); }
+          const k = 3 - this.ringsLeft; this.ringsLeft--; this.ringT = 0.7; const n = 12;
+          for (let i = 0; i < n; i++) { const a = (i + k * 0.5) / n * 6.283; G.weapons.fireball(this.x + Math.sin(a) * 2.4, this.z + Math.cos(a) * 2.4, Math.sin(a), Math.cos(a), 5.0, { damage: 10 }); }
           G.audio.play('boss_spit', { x: this.x, z: this.z, rate: 0.7 }); G.lights.burst(this.x, 2, this.z, 0xff6a18, 80, 14, 0.2); G.shake(0.4);
         }
         if (this.ringsLeft <= 0 && this.ringT <= -0.2) { this.setState('recover'); this.recoverT = 1.4; }

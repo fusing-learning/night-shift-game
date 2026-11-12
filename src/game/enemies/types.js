@@ -116,7 +116,7 @@ export class Crawler extends Enemy {
 export class Spitter extends Enemy {
   constructor(G, x, z, o = {}) {
     super(G, 'spitter', x, z, o);
-    this.radius = 0.68; this.hp = this.maxHp = 85; this.speed = 1.8; this.mass = 3; this.height = 0.7; this.wakeRange = o.wakeRange ?? 13;
+    this.radius = 0.68; this.hp = this.maxHp = 100; this.speed = 1.8; this.mass = 3; this.height = 0.7; this.wakeRange = o.wakeRange ?? 13;
     this.gibCount = 6; this.cd = 1 + Math.random(); this.inflate = 0; this.snap = 0; this.bloodColor = [0.42, 0.34, 0.03]; this.dropChance = 0.35; this.turnRate = 3;
     this.neckYaw = 0; this.strafe = Math.random() < 0.5 ? 1 : -1;
     if (this.rig) {
@@ -150,7 +150,7 @@ export class Spitter extends Enemy {
     if (this.cd <= 0 && this.sees && d < 15 && !P.dead) { this.setState('aim'); G.audio.play('spitter_gurgle', { x: this.x, z: this.z, gain: 0.8 }); }
   }
   animate(dt) {
-    if (this.sacMat) this.sacMat.emissiveIntensity = 0.9 + this.inflate * 4.5 + Math.sin(this.age * 3) * 0.15;
+    if (this.sacMat) this.sacMat.emissiveIntensity = 0.45 + this.inflate * 1.6 + Math.sin(this.age * 3) * 0.08;
     if (!this.rig) return;
     const R = this.rig; const breathe = Math.sin(this.age * 2.2) * 0.012;
     R.offset('body', 0, breathe - this.snap * 0.05, 0);
@@ -175,7 +175,7 @@ export class Spitter extends Enemy {
 export class Stalker extends Enemy {
   constructor(G, x, z, o = {}) {
     super(G, 'stalker', x, z, o);
-    this.radius = 0.42; this.hp = this.maxHp = 100; this.speed = 6.4; this.mass = 1.5; this.height = 1.3; this.wakeRange = o.wakeRange ?? 7;
+    this.radius = 0.42; this.hp = this.maxHp = 130; this.speed = 6.4; this.mass = 1.5; this.height = 1.3; this.wakeRange = o.wakeRange ?? 7;
     this.gibCount = 5; this.cd = 0; this.lit = false; this.litT = 0; this.ph = Math.random() * 6; this.amt = 0; this.tilt = (Math.random() - 0.5) * 0.8; this.reach = 0; this.slash = 0;
     this.bloodColor = [0.25, 0.02, 0.05]; this.dropChance = 0.5; this.turnRate = 10; this.creakT = 1; this.shrieked = false; this.hitDone = false;
   }
@@ -232,7 +232,7 @@ export class Stalker extends Enemy {
 export class Brute extends Enemy {
   constructor(G, x, z, o = {}) {
     super(G, 'brute', x, z, o);
-    this.radius = 0.95; this.hp = this.maxHp = 380; this.speed = 2.3; this.mass = 9; this.height = 1.4; this.wakeRange = o.wakeRange ?? 12;
+    this.radius = 0.95; this.hp = this.maxHp = 560; this.speed = 2.3; this.mass = 9; this.height = 1.4; this.wakeRange = o.wakeRange ?? 12;
     this.gibCount = 10; this.cd = 1.5; this.chargeCd = 3; this.ph = 0; this.amt = 0; this.arm = 0; this.lean = 0; this.dropChance = 0; this.turnRate = 3.2;
     this.chargeDir = { x: 0, z: 1 }; this.hitDone = false; this.stepSide = 0; this.marker = null; this.exhaust = this.glowMat('glow_orange');
   }

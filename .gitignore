@@ -7,3 +7,4 @@ tools/**/previews/
 tools/**/__pycache__/
 *.blend1
 .vite/
+.shots/

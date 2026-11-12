@@ -12,11 +12,16 @@ export class Weapons {
     this.boltGeo = new THREE.CapsuleGeometry(0.045, 0.75, 3, 6); this.boltGeo.rotateX(Math.PI / 2);
     this.boltMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0.8, 4.2, 6.5), fog: false });
     this.blobGeo = new THREE.IcosahedronGeometry(0.24, 1);
-    this.bileMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 2.6, 0.25), fog: false });
-    this.fireMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(5.0, 1.5, 0.2), fog: false });
+    this.bileMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(0.9, 1.5, 0.12), fog: false });
+    this.fireMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(2.6, 0.62, 0.08), fog: false });
     const ring = new THREE.RingGeometry(0.95, 1, 56); ring.rotateX(-Math.PI / 2);
     this.ringGeo = ring;
     const disc = new THREE.CircleGeometry(1, 32); disc.rotateX(-Math.PI / 2); this.discGeo = disc;
+    // soft, blotchy pool texture for acid / fire puddles
+    { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, 128, 128);
+      const gr = g.createRadialGradient(64, 64, 4, 64, 64, 62); gr.addColorStop(0, 'rgba(255,255,255,0.55)'); gr.addColorStop(0.6, 'rgba(255,255,255,0.32)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+      for (let i = 0; i < 46; i++) { const a = Math.random() * 6.283, d = Math.random() * 46, r = 3 + Math.random() * 9; const b = g.createRadialGradient(64 + Math.cos(a) * d, 64 + Math.sin(a) * d, 0, 64 + Math.cos(a) * d, 64 + Math.sin(a) * d, r); b.addColorStop(0, 'rgba(255,255,255,0.7)'); b.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = b; g.fillRect(0, 0, 128, 128); }
+      this.poolTex = new THREE.CanvasTexture(c); this.poolTex.colorSpace = THREE.SRGBColorSpace; }
     this.pool = [];
   }
 
@@ -27,6 +32,14 @@ export class Weapons {
     for (const w of this.waves) this.G.scene.remove(w.mesh);
     for (const m of this.marks) this.G.scene.remove(m.mesh);
     this.bolts.length = this.shots.length = this.puddles.length = this.waves.length = this.marks.length = 0;
+  }
+
+  // Create one of every effect off-stage so their shaders are compiled before play starts (avoids first-use hitches).
+  prewarm() {
+    const x = -200, z = -200, A = this.G.audio, play = A.play; A.play = () => null;   // silent
+    this.fireBolt(x, z, 1, 0); this.lob(x, 1, z, x + 1, z, 1, {}); this.lob(x, 1, z, x + 1, z, 1, { fire: true }); this.fireball(x, z, 1, 0, 1);
+    this.shockwave(x, z, 1, 2, 0); this.puddle(x, z, 1, 1, false); this.puddle(x, z, 1, 1, true); this.telegraph(x, z, 1, 1);
+    A.play = play; this.G.trauma = 0;
   }
 
   // ── player laser ──
@@ -129,8 +142,8 @@ export class Weapons {
   }
   puddle(x, z, radius, life, fire) {
     const G = this.G;
-    const mesh = new THREE.Mesh(this.discGeo, new THREE.MeshBasicMaterial({ color: fire ? new THREE.Color(1.6, 0.35, 0.05) : new THREE.Color(0.45, 0.8, 0.08), transparent: true, opacity: 0.5, depthWrite: false, blending: THREE.AdditiveBlending }));
-    mesh.scale.setScalar(radius); mesh.position.set(x, 0.035, z); G.scene.add(mesh);
+    const mesh = new THREE.Mesh(this.discGeo, new THREE.MeshBasicMaterial({ color: fire ? new THREE.Color(1.9, 0.42, 0.04) : new THREE.Color(0.5, 0.95, 0.08), map: this.poolTex, transparent: true, opacity: 0.8, depthWrite: false, blending: THREE.AdditiveBlending }));
+    mesh.scale.setScalar(radius * 1.25); mesh.rotation.y = Math.random() * 6.283; mesh.position.set(x, 0.035, z); G.scene.add(mesh);
     this.puddles.push({ x, z, radius, life, max: life, mesh, fire, tick: 0 });
   }
 
@@ -159,7 +172,7 @@ export class Weapons {
         const blocked = grid.raycast(s.x, s.z, nx, nz, SHOT) < 1;
         s.x = nx; s.z = nz; s.mesh.position.set(nx, 0.7, nz); s.mesh.rotation.y += dt * 6;
         if (Math.random() < 0.7) G.particles.embers(nx, 0.7, nz, 1, 0.25);
-        if (Math.random() < 0.3) G.particles.glow(nx, 0.7, nz, 0.9, [1.2, 0.35, 0.05], 0.12, 0.7);
+        if (Math.random() < 0.3) G.particles.glow(nx, 0.7, nz, 0.5, [0.7, 0.18, 0.02], 0.12, 0.6);
         const d = Math.hypot(P.x - nx, P.z - nz);
         let dead = blocked || s.life <= 0;
         if (d < s.radius + P.radius) { if (P.damage(s.damage, nx - s.dx, nz - s.dz, 3)) dead = true; }
@@ -168,7 +181,7 @@ export class Weapons {
     }
     for (let i = this.puddles.length - 1; i >= 0; i--) {
       const p = this.puddles[i]; p.life -= dt; p.tick -= dt;
-      p.mesh.material.opacity = 0.5 * Math.min(1, p.life / 1.0) * (0.8 + 0.2 * Math.sin(G.time * 9 + i));
+      p.mesh.material.opacity = 0.85 * Math.min(1, p.life / 1.0) * (0.75 + 0.25 * Math.sin(G.time * 9 + i)); p.mesh.rotation.y += dt * 0.4;
       if (Math.random() < dt * 8) (p.fire ? G.particles.embers(p.x, 0.1, p.z, 1, p.radius * 1.4) : G.particles.add.emit(p.x + (Math.random() - 0.5) * p.radius, 0.05, p.z + (Math.random() - 0.5) * p.radius, 0, 0.8, 0, 0.5, 0.1, 0.02, 0.5, 0.9, 0.1, 0.7, -0.5, 0));
       if (p.tick <= 0 && Math.hypot(P.x - p.x, P.z - p.z) < p.radius && P.dodgeT <= 0) { p.tick = 0.45; P.damage(p.fire ? 7 : 5, p.x, p.z, 0.5); }
       if (p.life <= 0) { G.scene.remove(p.mesh); this.puddles.splice(i, 1); }
