@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { PLAYER, GUN, BLADE } from '../config.js';
 import { Rig, damp, angDiff } from './rig.js';
+import { BladeSystem } from './blade.js';
 
 const _v = new THREE.Vector3(), _q = new THREE.Quaternion(), _axis = new THREE.Vector3(), _d = new THREE.Vector3();
 const mv = { x: 0, z: 0 };
@@ -57,13 +58,15 @@ export class Player {
         gl_FragColor = vec4(vec3(0.25, 0.9, 1.3) * head * tail * tail * r * uA * 2.2, 1.0); }`,
     }));
     this.arc.position.y = 0.55; this.arc.visible = false; this.arc.renderOrder = 8; this.root.add(this.arc);
+    // blade styles 1-3 (COMBO by default; ?blade=N / ?bladelab to switch); style 0 uses the original swing above
+    this.bladeSys = new BladeSystem(G, this);
   }
 
   place(x, z, facing) { this.x = this.safeX = x; this.z = this.safeZ = z; this.facing = facing; this.vx = this.vz = this.kx = this.kz = 0; this.sync(0); }
 
   reset() {
     this.hp = PLAYER.hp; this.energy = GUN.energyMax; this.heat = 0; this.overheat = 0; this.dead = false; this.deadT = 0;
-    this.dodgeT = 0; this.bladeT = 0; this.iframes = 1.0; this.control = true; this.root.rotation.set(0, 0, 0); this.model.rotation.set(0, 0, 0);
+    this.dodgeT = 0; this.bladeT = 0; this.bladeSys?.cancel(); this.iframes = 1.0; this.control = true; this.root.rotation.set(0, 0, 0); this.model.rotation.set(0, 0, 0);
   }
 
   heal(n) { this.hp = Math.min(PLAYER.hp, this.hp + n); }
@@ -155,12 +158,15 @@ export class Player {
     }
 
     // blade
-    if (can && inp.melee && this.bladeCd <= 0 && this.dodgeT <= 0) {
+    const BS = this.bladeSys;
+    if (BS.canCycle && inp.hit('KeyB')) { BS.cycle(); this.bladeT = 0; this.bladeGlow = 0; }
+    BS.update(dt, can, inp);
+    if (BS.style === 0 && can && inp.melee && this.bladeCd <= 0 && this.dodgeT <= 0) {
       this.bladeT = BLADE.swingTime; this.bladeCd = BLADE.cooldown; this.bladeHit = false; this.bladeSide = -this.bladeSide; this.bladeGlow = 1;
       G.audio.play('blade_swing', { gain: 0.9, rate: 0.95 + Math.random() * 0.1 }); G.audio.play('blade_ignite', { gain: 0.35, rate: 1.3 });
       G.lights.burst(this.x + fx, 0.8, this.z + fz, 0x40d8ff, 26, 7, 0.22);
     }
-    if (this.bladeT > 0) {
+    if (BS.style === 0 && this.bladeT > 0) {
       this.bladeT -= dt;
       const p = 1 - this.bladeT / BLADE.swingTime;
       if (!this.bladeHit && p > 0.35) { this.bladeHit = true; G.weapons.bladeStrike(this.x, this.z, this.facing); }
@@ -172,6 +178,7 @@ export class Player {
   // push transform + procedural pose to the scene
   sync(dt) {
     const G = this.G; const fx = Math.sin(this.facing), fz = Math.cos(this.facing);
+    const BS = this.bladeSys, nb = BS.style > 0;
     this.root.position.set(this.x, 0, this.z); this.root.rotation.y = this.facing;
     this.aimDir.set(fx, 0, fz);
     // local-space movement direction
@@ -189,15 +196,15 @@ export class Player {
       const k = Math.min(1, this.deadT / 0.55); m.quaternion.setFromAxisAngle(_axis.set(1, 0, 0), -k * k * Math.PI / 2); m.position.y = (this.rig ? 0 : 0.5) + 0.12 * k;
     } else {
       this.lean.x = damp(this.lean.x, lvx * 0.035, 10, dt || 0.016); this.lean.y = damp(this.lean.y, lvz * 0.035, 10, dt || 0.016);
-      m.rotation.set(this.lean.y, 0, -this.lean.x); m.position.y = (this.rig ? 0 : 0.5) + Math.abs(Math.sin(ph)) * 0.035 * amt;
+      m.rotation.set(this.lean.y, nb ? BS.bodySpin() : 0, -this.lean.x); m.position.y = (this.rig ? 0 : 0.5) + Math.abs(Math.sin(ph)) * 0.035 * amt;
     }
-    const swingP = this.bladeT > 0 ? 1 - this.bladeT / BLADE.swingTime : -1;
+    const swingP = !nb && this.bladeT > 0 ? 1 - this.bladeT / BLADE.swingTime : -1;
     const R = this.rig;
     if (R && R.ok) {
       _axis.set(-mz, 0, mx);
       const s = Math.sin(ph) * 0.75 * amt, c = Math.cos(ph);
       R.rot('hips', 0, Math.sin(ph) * 0.12 * amt, 0);
-      const twist = swingP >= 0 ? this.bladeSide * (0.9 - swingP * 1.8) : 0;
+      const twist = nb ? BS.twist() : (swingP >= 0 ? this.bladeSide * (0.9 - swingP * 1.8) : 0);
       R.rot('spine', 0.08 * amt, twist * 0.5, 0); R.rot('chest', 0.05, twist * 0.5, 0);
       R.rot('head', -0.05, -twist * 0.6, 0);
       // legs
@@ -208,7 +215,8 @@ export class Player {
       const rec = this.recoil * 0.16;
       R.aim('arm_R_upper', _d.set(-0.28, -0.55 + rec, 0.8)); R.aim('arm_R_lower', _d.set(0.12, -0.05 + rec * 2, 1)); R.aim('arm_R_hand', _d.set(0, 0, 1));
       // left arm: blade arm
-      if (swingP >= 0 || this.bladeGlow > 0.3) {
+      if (nb && BS.active) BS.poseArm(R);
+      else if (swingP >= 0 || this.bladeGlow > 0.3) {
         const a = this.bladeSide * (1.15 - Math.max(0, swingP) * 2.3);
         R.aim('arm_L_upper', _d.set(Math.sin(a) + 0.2, -0.15, Math.cos(a))); R.aim('arm_L_lower', _d.set(Math.sin(a), 0, Math.cos(a))); R.aim('arm_L_hand', _d.set(Math.sin(a), 0, Math.cos(a)));
       } else {
@@ -219,6 +227,7 @@ export class Player {
       if (hand) { m.updateWorldMatrix(true, true); hand.bone.getWorldPosition(_v); this.root.worldToLocal(_v); this.gun.position.set(_v.x, _v.y + 0.02, _v.z + 0.02 - this.recoil * 0.05); }
     }
     this.gun.visible = !this.dead && this.dodgeT <= 0;
+    BS.sync();
     // blade + arc
     const show = swingP >= 0 || this.bladeGlow > 0.25;
     this.blade.visible = show && !this.dead;

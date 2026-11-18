@@ -22,7 +22,7 @@ npm run dev
 | `W A S D` | Move |
 | Mouse | Aim (the character, torch and gun follow the cursor) |
 | Left mouse | Fire the laser (uses the energy cell; overheats if spammed) |
-| Right mouse / `Space` | Energy blade (close range; hits recharge the cell) |
+| Right mouse / `Space` | Energy blade (close range; hits recharge the cell). Keep pressing for slash → backhand → lunging spin finisher |
 | `Shift` | Dodge roll (brief invulnerability) |
 | `F` | Torch on/off (dormant things notice you less with it off — but one kind only moves in the dark) |
 | `E` | Use (keycard reader, breaker) |
@@ -49,3 +49,5 @@ Append to the URL, e.g. `http://localhost:5273/?cp=4&god`:
 - `god` — invulnerable
 - `bot` — autoplayer (used for automated playtests)
 - `autostart`, `mute`, `nopause`, `noao`
+- `blade=0..3` — blade style: 0 original, 1 crescent, 2 combo (default), 3 lightsweep; `B` cycles while the flag is set
+- `bladelab` — blade test room in the furnace hall with respawning dummy targets (`B` / `0`–`3` style, `R` target layout)

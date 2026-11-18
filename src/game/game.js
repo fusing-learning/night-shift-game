@@ -43,6 +43,7 @@ export class Game {
     this.decoy = null;
     addEventListener('resize', () => this.onResize()); this.onResize();
     this.loadCheckpoint(CHECKPOINTS[Math.min(4, +(DEBUG.get('cp') || 0))], true);
+    if (DEBUG.has('bladelab')) import('../debug/bladelab.js').then((m) => { this.lab = m.initLab(this); });   // blade test room
   }
 
   freshFlags() { return { key: false, door1: false, scare: 0, power: false, ambush: 0, asmCleared: false, whStalker: false, arena: 0, arenaCleared: false, door4: false, boss: 0, bossDead: false, hints: {} }; }
@@ -267,6 +268,8 @@ export class Game {
     this.state = 'play'; this.fadeTarget = 0; this.fadeSpeed = 0.5; this.audio.play('ui_start'); this.audio.setMusic('explore', 2.5);
     this.after(1.5, () => this.hud.hint('WASD  MOVE      MOUSE  AIM      LMB  FIRE', 6));
     this.after(8.5, () => this.hud.hint('RMB / SPACE  BLADE      SHIFT  DODGE      F  TORCH', 6));
+    // own line so the hint stays clear of the vitals on narrow windows
+    if (this.player.bladeSys.style === 2) this.after(15, () => this.hud.hint('TAP BLADE 3×  —  SLASH, BACKHAND, SPIN', 5));
     this.setObjective();
   }
   finish() {
@@ -376,7 +379,7 @@ export class Game {
       for (const e of this.enemies) e.update(dt);
       for (let i = this.enemies.length - 1; i >= 0; i--) if (this.enemies[i].removed) this.enemies.splice(i, 1);
       this.weapons.update(dt); this.gibs.update(dt); this.updatePickups(dt);
-      if (this.state === 'play') this.updateScript(dt);
+      if (this.state === 'play') { this.updateScript(dt); this.lab?.update(dt); }
       if (this.state === 'dead' && this.hud.deathShown && (inp.anyKey)) this.respawn();
       this.updateAudioMood(dt);
     } else { P.sync(dt); }
