@@ -1,5 +1,5 @@
 #!/bin/zsh
-# HOLLOW SHIFT launcher — double-click me in Finder.
+# NIGHT SHIFT launcher — double-click me in Finder.
 cd "$(dirname "$0")" || exit 1
 PORT=5273
 # make node available when launched from Finder (nvm / Homebrew installs)
@@ -14,5 +14,5 @@ echo "Building…"; npx vite build >/dev/null || { echo "Build failed."; read -r
 lsof -ti tcp:$PORT | xargs kill 2>/dev/null
 ( sleep 1.2
   if [ -d "/Applications/Google Chrome.app" ]; then open -a "Google Chrome" "http://localhost:$PORT"; else open "http://localhost:$PORT"; fi ) &
-echo "HOLLOW SHIFT is running at http://localhost:$PORT — close this window to stop it."
+echo "NIGHT SHIFT is running at http://localhost:$PORT — close this window to stop it."
 npx vite preview --port $PORT --strictPort

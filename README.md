@@ -1,4 +1,4 @@
-# HOLLOW SHIFT
+# NIGHT SHIFT
 
 A short top-down survival-horror action game set in an abandoned factory. Built with three.js; plays in the browser on an Apple-silicon Mac (Chrome recommended). One run takes roughly 5–8 minutes.
 
@@ -6,7 +6,9 @@ A short top-down survival-horror action game set in an abandoned factory. Built 
 
 ## Play
 
-Double-click **`start.command`**. It installs dependencies on first run, builds the game and opens it in Chrome at `http://localhost:5273`. Go fullscreen (`⌃⌘F`) and wear headphones.
+**In your browser:** https://fusing-learning.github.io/night-shift-game/ (desktop Chrome, keyboard and mouse). Every push to `main` redeploys it.
+
+**Locally:** double-click **`start.command`**. It installs dependencies on first run, builds the game and opens it in Chrome at `http://localhost:5273`. Go fullscreen (`⌃⌘F`) and wear headphones.
 
 From a terminal instead:
 
