@@ -8,3 +8,6 @@ tools/**/__pycache__/
 *.blend1
 .vite/
 .shots/
+
+# design reference images (other studios' art) - kept local only
+ref/
