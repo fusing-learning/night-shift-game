@@ -37,11 +37,11 @@ export class AudioEngine {
 
   async load(onProgress = () => {}) {
     this.init(); if (!this.ctx) return;
-    try { const r = await fetch('/audio/manifest.json'); const t = await r.text(); if (!t.trim().startsWith('<')) this.manifest = JSON.parse(t); } catch { /* no audio yet */ }
+    try { const r = await fetch(`${import.meta.env.BASE_URL}audio/manifest.json`); const t = await r.text(); if (!t.trim().startsWith('<')) this.manifest = JSON.parse(t); } catch { /* no audio yet */ }
     const files = new Set(); for (const s of Object.values(this.manifest.sounds || {})) for (const f of s.files) files.add(f);
     let done = 0; const total = files.size || 1;
     await Promise.all([...files].map(async (f) => {
-      try { const r = await fetch('/audio/' + f); const ab = await r.arrayBuffer(); this.buffers[f] = await this.ctx.decodeAudioData(ab); } catch { /* skip */ }
+      try { const r = await fetch(`${import.meta.env.BASE_URL}audio/${f}`); const ab = await r.arrayBuffer(); this.buffers[f] = await this.ctx.decodeAudioData(ab); } catch { /* skip */ }
       onProgress(++done / total);
     }));
     this.ready = true;

@@ -44,11 +44,11 @@ export class Assets {
   async loadAll() {
     const jobs = [];
     let done = 0; const tick = (p) => p.then((v) => { done++; this.onProgress(done / jobs.length); return v; });
-    this.texManifest = (await this.json('/textures/manifest.json')) || {};
+    this.texManifest = (await this.json(`${import.meta.env.BASE_URL}textures/manifest.json`)) || {};
     for (const [slot, info] of Object.entries(this.texManifest)) {
       this.tex[slot] = { tile: info.tileSizeMeters || 2 };
       for (const m of info.maps || []) {
-        jobs.push(tick(this.loadTex(`/textures/${slot}/${m}.jpg`, m === 'color').then((t) => {
+        jobs.push(tick(this.loadTex(`${import.meta.env.BASE_URL}textures/${slot}/${m}.jpg`, m === 'color').then((t) => {
           if (t) { t.repeat.setScalar(1 / this.tex[slot].tile); this.tex[slot][m] = t; }
         })));
       }
@@ -56,7 +56,7 @@ export class Assets {
     for (const name of ['props', 'player', 'gun', 'crawler', 'spitter', 'stalker', 'brute', 'boss', 'gibs', 'growths']) {
       jobs.push(tick(this.loadModel(name)));
     }
-    jobs.push(tick(this.json('/models/props.json').then((j) => { this.propInfo = j || {}; })));
+    jobs.push(tick(this.json(`${import.meta.env.BASE_URL}models/props.json`).then((j) => { this.propInfo = j || {}; })));
     await Promise.all(jobs);
     this.buildEnvironment();
     this.buildMaterials();
@@ -65,7 +65,7 @@ export class Assets {
 
   loadModel(name) {
     return new Promise((res) => {
-      this.gltfLoader.load(`/models/${name}.glb`, (g) => { this.models[name] = g.scene; res(g.scene); }, undefined, () => res(null));
+      this.gltfLoader.load(`${import.meta.env.BASE_URL}models/${name}.glb`, (g) => { this.models[name] = g.scene; res(g.scene); }, undefined, () => res(null));
     });
   }
 

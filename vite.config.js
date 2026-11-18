@@ -17,4 +17,5 @@ const shots = () => ({
   },
 });
 
-export default defineConfig({ plugins: [shots()], build: { chunkSizeWarningLimit: 1200 } });
+// base './' keeps every asset URL relative, so the build also works from a subfolder (GitHub Pages serves it at /<repo>/)
+export default defineConfig({ base: './', plugins: [shots()], build: { chunkSizeWarningLimit: 1200 } });
